@@ -3,7 +3,7 @@
 Before you can run this project using Docker Compose, make sure you have created a `.env` file with the necessary environment variables. 
 
 Here are the steps to set up the project:
-
+Note : **Make Sure Your /helper/source/init.sql have the data**
 1. Create a new file named `.env` in the root directory of the project.
 2. Open the `.env` file and add the following environment variables:
 
