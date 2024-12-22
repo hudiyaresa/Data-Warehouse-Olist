@@ -96,6 +96,22 @@ CREATE TABLE final.fct_payment (
     current_flag VARCHAR(20) DEFAULT 'Current'
 );
 
+-- Date Table
+DROP TABLE if exists final.dim_date;
+CREATE TABLE final.dim_date
+(
+    date_id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    date DATE NOT NULL UNIQUE,
+    full_date DATE NOT NULL UNIQUE,
+    day INT NOT NULL,
+    month INT NOT NULL,
+    year INT NOT NULL,
+    quarter INT NOT NULL,
+    day_of_week INT NOT NULL,
+    day_name VARCHAR(20),
+    month_name VARCHAR(20),
+);
+
 -- Indices for Performance
 CREATE INDEX idx_customer_email ON final.dim_customer(email);
 CREATE INDEX idx_seller_email ON final.dim_seller(email);
