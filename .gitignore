@@ -1,4 +1,5 @@
 venv/
+.venv/
 creds/
 .env
 **/__pycache__/
