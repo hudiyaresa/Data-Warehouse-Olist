@@ -14,8 +14,7 @@
 5. [Orchestrate ELT with Luigi](#orchestrate-elt-with-luigi)
    1. [Setup Instructions](#setup-instructions)
 6. [Requirements](#requirements)
-7. [Tech Stack](#tech-stack)
-8. [References](#references)
+7. [References](#references)
 
 ---
 
@@ -142,25 +141,3 @@ pip install -r requirements.txt
 3. **PostgreSQL Documentation**: [https://www.postgresql.org/docs/](https://www.postgresql.org/docs/)
 4. **Sentry SDK for Python**: [https://docs.sentry.io/platforms/python/](https://docs.sentry.io/platforms/python/)
 ```
-
-<!-- ## Tech Stack
-### OS:
-- Linux
-- WSL
-
-### Tools:
-- Dbeaver
-- Docker
-- Cron
-
-### Programming Language:
-- Python
-- SQL
-
-### Python Library:
-- Luigi
-- Pandas
-- Sentry-SDK
-
-### Platforms:
-- Sentry -->
