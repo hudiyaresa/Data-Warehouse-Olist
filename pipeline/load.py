@@ -88,11 +88,11 @@ class Load(luigi.Task):
             
             # Modify some columns.
             # Modify some columns because if they are not replaced it will result in an error
-            customers['model'] = customers['model'].str.replace("'", '"')
-            order_items['airport_name'] = order_items['airport_name'].str.replace("'", '"')
-            order_items['city'] = order_items['city'].str.replace("'", '"')
-            products = products.where(pd.notnull(products), None)
-            order_reviews['contact_data'] = order_reviews['contact_data'].str.replace("'", '"')
+            # customers['model'] = customers['model'].str.replace("'", '"')
+            # order_items['airport_name'] = order_items['airport_name'].str.replace("'", '"')
+            # order_items['city'] = order_items['city'].str.replace("'", '"')
+            # products = products.where(pd.notnull(products), None)
+            # order_reviews['contact_data'] = order_reviews['contact_data'].str.replace("'", '"')
             
             logging.info(f"Read Extracted Data - SUCCESS")
             
@@ -115,33 +115,33 @@ class Load(luigi.Task):
         #----------------------------------------------------------------------------------------------------------------------------------------
         # Truncate all tables before load
         # This puropose to avoid errors because duplicate key value violates unique constraint
-        try:            
-            # Split the SQL queries if multiple queries are present
-            truncate_query = truncate_query.split(';')
+        # try:            
+        #     # Split the SQL queries if multiple queries are present
+        #     truncate_query = truncate_query.split(';')
 
-            # Remove newline characters and leading/trailing whitespaces
-            truncate_query = [query.strip() for query in truncate_query if query.strip()]
+        #     # Remove newline characters and leading/trailing whitespaces
+        #     truncate_query = [query.strip() for query in truncate_query if query.strip()]
             
-            # Create session
-            Session = sessionmaker(bind = dwh_engine)
-            session = Session()
+        #     # Create session
+        #     Session = sessionmaker(bind = dwh_engine)
+        #     session = Session()
 
-            # Execute each query
-            for query in truncate_query:
-                query = sqlalchemy.text(query)
-                session.execute(query)
+        #     # Execute each query
+        #     for query in truncate_query:
+        #         query = sqlalchemy.text(query)
+        #         session.execute(query)
                 
-            session.commit()
+        #     session.commit()
             
-            # Close session
-            session.close()
+        #     # Close session
+        #     session.close()
 
-            logging.info(f"Truncate Public Source Schema in DWH - SUCCESS")
+        #     logging.info(f"Truncate Public Source Schema in DWH - SUCCESS")
         
-        except Exception:
-            logging.error(f"Truncate Public Source Schema in DWH - FAILED")
+        # except Exception:
+        #     logging.error(f"Truncate Public Source Schema in DWH - FAILED")
             
-            raise Exception("Failed to Truncate Public Source Schema in DWH")
+        #     raise Exception("Failed to Truncate Public Source Schema in DWH")
         
         
         
@@ -156,7 +156,7 @@ class Load(luigi.Task):
                 # Load aircraft tables    
                 customers.to_sql('customers', 
                                     con = dwh_engine, 
-                                    if_exists = 'append', 
+                                    if_exists = 'replace', 
                                     index = False, 
                                     schema = 'public')
                 logging.info(f"LOAD 'public.customers' - SUCCESS")
@@ -165,16 +165,16 @@ class Load(luigi.Task):
                 # Load order_items tables
                 order_items.to_sql('order_items', 
                                     con = dwh_engine, 
-                                    if_exists = 'append', 
+                                    if_exists = 'replace', 
                                     index = False, 
                                     schema = 'public')
                 logging.info(f"LOAD 'public.order_items' - SUCCESS")
                 
                 
                 # Load order_payments tables
-                order_paments.to_sql('order_payments', 
+                order_payments.to_sql('order_payments', 
                                 con = dwh_engine, 
-                                if_exists = 'append', 
+                                if_exists = 'replace', 
                                 index = False, 
                                 schema = 'public')
                 logging.info(f"LOAD 'public.order_payments' - SUCCESS")
@@ -183,7 +183,7 @@ class Load(luigi.Task):
                 # Load order_reviews tables
                 order_reviews.to_sql('order_reviews', 
                             con = dwh_engine, 
-                            if_exists = 'append', 
+                            if_exists = 'replace', 
                             index = False, 
                             schema = 'public')
                 logging.info(f"LOAD 'public.order_reviews' - SUCCESS")
@@ -192,7 +192,7 @@ class Load(luigi.Task):
                 # Load orders tables
                 orders.to_sql('orders', 
                             con = dwh_engine, 
-                            if_exists = 'append', 
+                            if_exists = 'replace', 
                             index = False, 
                             schema = 'public')
                 logging.info(f"LOAD 'public.orders' - SUCCESS")
@@ -201,7 +201,7 @@ class Load(luigi.Task):
                 # Load products tables
                 products.to_sql('products', 
                             con = dwh_engine, 
-                            if_exists = 'append', 
+                            if_exists = 'replace', 
                             index = False, 
                             schema = 'public')
                 logging.info(f"LOAD 'public.products' - SUCCESS")
@@ -210,7 +210,7 @@ class Load(luigi.Task):
                 # Load sellers tables
                 sellers.to_sql('sellers', 
                                     con = dwh_engine, 
-                                    if_exists = 'append', 
+                                    if_exists = 'replace', 
                                     index = False, 
                                     schema = 'public')
                 logging.info(f"LOAD 'public.sellers' - SUCCESS")

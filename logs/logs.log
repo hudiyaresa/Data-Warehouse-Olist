@@ -1218,3 +1218,1255 @@ This progress looks :( because there were failed tasks
 
 ===== Luigi Execution Summary =====
 
+2024-12-22 23:32:32,261 - INFO - ==================================STARTING EXTRACT DATA=======================================
+2024-12-22 23:32:32,269 - ERROR - EXTRACT 'public.customers' - FAILED.
+2024-12-22 23:32:32,309 - INFO - Extract All Tables From Sources - FAILED
+2024-12-22 23:32:32,322 - ERROR - [pid 102232] Worker Worker(salt=593273724, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=102232) failed    Extract()
+Traceback (most recent call last):
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3303, in raw_connection
+    return self.pool.connect()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 1263, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 712, in checkout
+    rec = pool._do_get()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 179, in _do_get
+    with util.safe_reraise():
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 177, in _do_get
+    return self._create_connection()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 674, in __init__
+    self.__connect()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 900, in __connect
+    with util.safe_reraise():
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 896, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/create.py", line 643, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+  File "/home/user/.local/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5443 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/extract.py", line 56, in run
+    df = pd.read_sql_query(extract_query.format(table_name = table_name), src_engine)
+  File "/home/user/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 525, in read_sql_query
+    with pandasSQL_builder(con) as pandas_sql:
+  File "/home/user/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 906, in pandasSQL_builder
+    return SQLDatabase(con, schema, need_transaction)
+  File "/home/user/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 1636, in __init__
+    con = self.exit_stack.enter_context(con.connect())
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3279, in connect
+    return self._connection_cls(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 147, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2443, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3303, in raw_connection
+    return self.pool.connect()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 1263, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 712, in checkout
+    rec = pool._do_get()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 179, in _do_get
+    with util.safe_reraise():
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 177, in _do_get
+    return self._create_connection()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 674, in __init__
+    self.__connect()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 900, in __connect
+    with util.safe_reraise():
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 896, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/create.py", line 643, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+  File "/home/user/.local/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5443 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/extract.py", line 65, in run
+    raise Exception(f"Failed to extract '{table_name}' tables")
+Exception: Failed to extract 'public.customers' tables
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/user/.local/lib/python3.10/site-packages/luigi/worker.py", line 210, in run
+    new_deps = self._run_get_new_deps()
+  File "/home/user/.local/lib/python3.10/site-packages/luigi/worker.py", line 138, in _run_get_new_deps
+    task_gen = self.task.run()
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/extract.py", line 104, in run
+    raise Exception(f"FAILED to execute EXTRACT TASK !!!")
+Exception: FAILED to execute EXTRACT TASK !!!
+2024-12-22 23:32:32,383 - DEBUG - 1 running tasks, waiting for next task to finish
+2024-12-22 23:32:32,389 - INFO - Informed scheduler that task   Extract__99914b932b   has status   FAILED
+2024-12-22 23:32:32,390 - DEBUG - Asking scheduler for work...
+2024-12-22 23:32:32,393 - DEBUG - Done
+2024-12-22 23:32:32,394 - DEBUG - There are no more tasks to run at this time
+2024-12-22 23:32:32,395 - DEBUG - There are 3 pending tasks possibly being run by other workers
+2024-12-22 23:32:32,395 - DEBUG - There are 3 pending tasks unique to this worker
+2024-12-22 23:32:32,396 - DEBUG - There are 3 pending tasks last scheduled by this worker
+2024-12-22 23:32:32,396 - INFO - Worker Worker(salt=593273724, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=102232) was stopped. Shutting down Keep-Alive thread
+2024-12-22 23:32:32,398 - INFO - 
+===== Luigi Execution Summary =====
+
+Scheduled 3 tasks of which:
+* 1 failed:
+    - 1 Extract()
+* 2 were left pending, among these:
+    * 2 had failed dependencies:
+        - 1 Load()
+        - 1 Transform()
+
+This progress looks :( because there were failed tasks
+
+===== Luigi Execution Summary =====
+
+2024-12-22 23:55:26,218 - INFO - ==================================STARTING EXTRACT DATA=======================================
+2024-12-22 23:55:26,223 - ERROR - EXTRACT 'public.customers' - FAILED.
+2024-12-22 23:55:26,293 - INFO - Extract All Tables From Sources - FAILED
+2024-12-22 23:55:26,303 - ERROR - [pid 114574] Worker Worker(salt=743511585, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=114574) failed    Extract()
+Traceback (most recent call last):
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3303, in raw_connection
+    return self.pool.connect()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 1263, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 712, in checkout
+    rec = pool._do_get()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 179, in _do_get
+    with util.safe_reraise():
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 177, in _do_get
+    return self._create_connection()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 674, in __init__
+    self.__connect()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 900, in __connect
+    with util.safe_reraise():
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 896, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/create.py", line 643, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+  File "/home/user/.local/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5443 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/extract.py", line 56, in run
+    df = pd.read_sql_query(extract_query.format(table_name = table_name), src_engine)
+  File "/home/user/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 525, in read_sql_query
+    with pandasSQL_builder(con) as pandas_sql:
+  File "/home/user/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 906, in pandasSQL_builder
+    return SQLDatabase(con, schema, need_transaction)
+  File "/home/user/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 1636, in __init__
+    con = self.exit_stack.enter_context(con.connect())
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3279, in connect
+    return self._connection_cls(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 147, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2443, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3303, in raw_connection
+    return self.pool.connect()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 1263, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 712, in checkout
+    rec = pool._do_get()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 179, in _do_get
+    with util.safe_reraise():
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 177, in _do_get
+    return self._create_connection()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 674, in __init__
+    self.__connect()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 900, in __connect
+    with util.safe_reraise():
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 896, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/create.py", line 643, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+  File "/home/user/.local/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5443 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/extract.py", line 65, in run
+    raise Exception(f"Failed to extract '{table_name}' tables")
+Exception: Failed to extract 'public.customers' tables
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/user/.local/lib/python3.10/site-packages/luigi/worker.py", line 210, in run
+    new_deps = self._run_get_new_deps()
+  File "/home/user/.local/lib/python3.10/site-packages/luigi/worker.py", line 138, in _run_get_new_deps
+    task_gen = self.task.run()
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/extract.py", line 104, in run
+    raise Exception(f"FAILED to execute EXTRACT TASK !!!")
+Exception: FAILED to execute EXTRACT TASK !!!
+2024-12-22 23:55:26,351 - DEBUG - 1 running tasks, waiting for next task to finish
+2024-12-22 23:55:26,357 - INFO - Informed scheduler that task   Extract__99914b932b   has status   FAILED
+2024-12-22 23:55:26,358 - DEBUG - Asking scheduler for work...
+2024-12-22 23:55:26,360 - DEBUG - Done
+2024-12-22 23:55:26,361 - DEBUG - There are no more tasks to run at this time
+2024-12-22 23:55:26,361 - DEBUG - There are 3 pending tasks possibly being run by other workers
+2024-12-22 23:55:26,362 - DEBUG - There are 3 pending tasks unique to this worker
+2024-12-22 23:55:26,363 - DEBUG - There are 3 pending tasks last scheduled by this worker
+2024-12-22 23:55:26,363 - INFO - Worker Worker(salt=743511585, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=114574) was stopped. Shutting down Keep-Alive thread
+2024-12-22 23:55:26,366 - INFO - 
+===== Luigi Execution Summary =====
+
+Scheduled 3 tasks of which:
+* 1 failed:
+    - 1 Extract()
+* 2 were left pending, among these:
+    * 2 had failed dependencies:
+        - 1 Load()
+        - 1 Transform()
+
+This progress looks :( because there were failed tasks
+
+===== Luigi Execution Summary =====
+
+2024-12-22 23:57:46,629 - INFO - ==================================STARTING EXTRACT DATA=======================================
+2024-12-22 23:57:46,633 - ERROR - EXTRACT 'public.customers' - FAILED.
+2024-12-22 23:57:46,683 - INFO - Extract All Tables From Sources - FAILED
+2024-12-22 23:57:46,690 - ERROR - [pid 114603] Worker Worker(salt=1478653978, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=114603) failed    Extract()
+Traceback (most recent call last):
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3303, in raw_connection
+    return self.pool.connect()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 1263, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 712, in checkout
+    rec = pool._do_get()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 179, in _do_get
+    with util.safe_reraise():
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 177, in _do_get
+    return self._create_connection()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 674, in __init__
+    self.__connect()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 900, in __connect
+    with util.safe_reraise():
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 896, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/create.py", line 643, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+  File "/home/user/.local/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5443 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/extract.py", line 56, in run
+    df = pd.read_sql_query(extract_query.format(table_name = table_name), src_engine)
+  File "/home/user/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 525, in read_sql_query
+    with pandasSQL_builder(con) as pandas_sql:
+  File "/home/user/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 906, in pandasSQL_builder
+    return SQLDatabase(con, schema, need_transaction)
+  File "/home/user/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 1636, in __init__
+    con = self.exit_stack.enter_context(con.connect())
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3279, in connect
+    return self._connection_cls(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 147, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2443, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3303, in raw_connection
+    return self.pool.connect()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 1263, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 712, in checkout
+    rec = pool._do_get()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 179, in _do_get
+    with util.safe_reraise():
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 177, in _do_get
+    return self._create_connection()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 674, in __init__
+    self.__connect()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 900, in __connect
+    with util.safe_reraise():
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 896, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/create.py", line 643, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+  File "/home/user/.local/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5443 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/extract.py", line 65, in run
+    raise Exception(f"Failed to extract '{table_name}' tables")
+Exception: Failed to extract 'public.customers' tables
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/user/.local/lib/python3.10/site-packages/luigi/worker.py", line 210, in run
+    new_deps = self._run_get_new_deps()
+  File "/home/user/.local/lib/python3.10/site-packages/luigi/worker.py", line 138, in _run_get_new_deps
+    task_gen = self.task.run()
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/extract.py", line 104, in run
+    raise Exception(f"FAILED to execute EXTRACT TASK !!!")
+Exception: FAILED to execute EXTRACT TASK !!!
+2024-12-22 23:57:46,737 - DEBUG - 1 running tasks, waiting for next task to finish
+2024-12-22 23:57:46,744 - INFO - Informed scheduler that task   Extract__99914b932b   has status   FAILED
+2024-12-22 23:57:46,745 - DEBUG - Asking scheduler for work...
+2024-12-22 23:57:46,748 - DEBUG - Done
+2024-12-22 23:57:46,748 - DEBUG - There are no more tasks to run at this time
+2024-12-22 23:57:46,748 - DEBUG - There are 3 pending tasks possibly being run by other workers
+2024-12-22 23:57:46,748 - DEBUG - There are 3 pending tasks unique to this worker
+2024-12-22 23:57:46,749 - DEBUG - There are 3 pending tasks last scheduled by this worker
+2024-12-22 23:57:46,749 - INFO - Worker Worker(salt=1478653978, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=114603) was stopped. Shutting down Keep-Alive thread
+2024-12-22 23:57:46,750 - INFO - 
+===== Luigi Execution Summary =====
+
+Scheduled 3 tasks of which:
+* 1 failed:
+    - 1 Extract()
+* 2 were left pending, among these:
+    * 2 had failed dependencies:
+        - 1 Load()
+        - 1 Transform()
+
+This progress looks :( because there were failed tasks
+
+===== Luigi Execution Summary =====
+
+2024-12-23 00:11:35,397 - INFO - ==================================STARTING EXTRACT DATA=======================================
+2024-12-23 00:11:35,401 - ERROR - EXTRACT 'public.customers' - FAILED.
+2024-12-23 00:11:35,478 - INFO - Extract All Tables From Sources - FAILED
+2024-12-23 00:11:35,488 - ERROR - [pid 114781] Worker Worker(salt=7395089440, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=114781) failed    Extract()
+Traceback (most recent call last):
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3303, in raw_connection
+    return self.pool.connect()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 1263, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 712, in checkout
+    rec = pool._do_get()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 179, in _do_get
+    with util.safe_reraise():
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 177, in _do_get
+    return self._create_connection()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 674, in __init__
+    self.__connect()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 900, in __connect
+    with util.safe_reraise():
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 896, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/create.py", line 643, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+  File "/home/user/.local/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5443 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/extract.py", line 56, in run
+    df = pd.read_sql_query(extract_query.format(table_name = table_name), src_engine)
+  File "/home/user/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 525, in read_sql_query
+    with pandasSQL_builder(con) as pandas_sql:
+  File "/home/user/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 906, in pandasSQL_builder
+    return SQLDatabase(con, schema, need_transaction)
+  File "/home/user/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 1636, in __init__
+    con = self.exit_stack.enter_context(con.connect())
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3279, in connect
+    return self._connection_cls(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 147, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2443, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3303, in raw_connection
+    return self.pool.connect()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 1263, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 712, in checkout
+    rec = pool._do_get()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 179, in _do_get
+    with util.safe_reraise():
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 177, in _do_get
+    return self._create_connection()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 674, in __init__
+    self.__connect()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 900, in __connect
+    with util.safe_reraise():
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 896, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/create.py", line 643, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+  File "/home/user/.local/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5443 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/extract.py", line 65, in run
+    raise Exception(f"Failed to extract '{table_name}' tables")
+Exception: Failed to extract 'public.customers' tables
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/user/.local/lib/python3.10/site-packages/luigi/worker.py", line 210, in run
+    new_deps = self._run_get_new_deps()
+  File "/home/user/.local/lib/python3.10/site-packages/luigi/worker.py", line 138, in _run_get_new_deps
+    task_gen = self.task.run()
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/extract.py", line 104, in run
+    raise Exception(f"FAILED to execute EXTRACT TASK !!!")
+Exception: FAILED to execute EXTRACT TASK !!!
+2024-12-23 00:11:35,533 - DEBUG - 1 running tasks, waiting for next task to finish
+2024-12-23 00:11:35,539 - INFO - Informed scheduler that task   Extract__99914b932b   has status   FAILED
+2024-12-23 00:11:35,540 - DEBUG - Asking scheduler for work...
+2024-12-23 00:11:35,542 - DEBUG - Done
+2024-12-23 00:11:35,543 - DEBUG - There are no more tasks to run at this time
+2024-12-23 00:11:35,543 - DEBUG - There are 3 pending tasks possibly being run by other workers
+2024-12-23 00:11:35,544 - DEBUG - There are 3 pending tasks unique to this worker
+2024-12-23 00:11:35,544 - DEBUG - There are 3 pending tasks last scheduled by this worker
+2024-12-23 00:11:35,544 - INFO - Worker Worker(salt=7395089440, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=114781) was stopped. Shutting down Keep-Alive thread
+2024-12-23 00:11:35,546 - INFO - 
+===== Luigi Execution Summary =====
+
+Scheduled 3 tasks of which:
+* 1 failed:
+    - 1 Extract()
+* 2 were left pending, among these:
+    * 2 had failed dependencies:
+        - 1 Load()
+        - 1 Transform()
+
+This progress looks :( because there were failed tasks
+
+===== Luigi Execution Summary =====
+
+2024-12-23 00:16:54,447 - INFO - ==================================STARTING EXTRACT DATA=======================================
+2024-12-23 00:16:54,450 - ERROR - EXTRACT 'public.customers' - FAILED.
+2024-12-23 00:16:54,494 - INFO - Extract All Tables From Sources - FAILED
+2024-12-23 00:16:54,500 - ERROR - [pid 114808] Worker Worker(salt=9939307206, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=114808) failed    Extract()
+Traceback (most recent call last):
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3303, in raw_connection
+    return self.pool.connect()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 1263, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 712, in checkout
+    rec = pool._do_get()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 179, in _do_get
+    with util.safe_reraise():
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 177, in _do_get
+    return self._create_connection()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 674, in __init__
+    self.__connect()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 900, in __connect
+    with util.safe_reraise():
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 896, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/create.py", line 643, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+  File "/home/user/.local/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/extract.py", line 56, in run
+    df = pd.read_sql_query(extract_query.format(table_name = table_name), src_engine)
+  File "/home/user/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 525, in read_sql_query
+    with pandasSQL_builder(con) as pandas_sql:
+  File "/home/user/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 906, in pandasSQL_builder
+    return SQLDatabase(con, schema, need_transaction)
+  File "/home/user/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 1636, in __init__
+    con = self.exit_stack.enter_context(con.connect())
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3279, in connect
+    return self._connection_cls(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 147, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2443, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3303, in raw_connection
+    return self.pool.connect()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 1263, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 712, in checkout
+    rec = pool._do_get()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 179, in _do_get
+    with util.safe_reraise():
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 177, in _do_get
+    return self._create_connection()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 674, in __init__
+    self.__connect()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 900, in __connect
+    with util.safe_reraise():
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 896, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/create.py", line 643, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+  File "/home/user/.local/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/extract.py", line 65, in run
+    raise Exception(f"Failed to extract '{table_name}' tables")
+Exception: Failed to extract 'public.customers' tables
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/user/.local/lib/python3.10/site-packages/luigi/worker.py", line 210, in run
+    new_deps = self._run_get_new_deps()
+  File "/home/user/.local/lib/python3.10/site-packages/luigi/worker.py", line 138, in _run_get_new_deps
+    task_gen = self.task.run()
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/extract.py", line 104, in run
+    raise Exception(f"FAILED to execute EXTRACT TASK !!!")
+Exception: FAILED to execute EXTRACT TASK !!!
+2024-12-23 00:16:54,537 - DEBUG - 1 running tasks, waiting for next task to finish
+2024-12-23 00:16:54,544 - INFO - Informed scheduler that task   Extract__99914b932b   has status   FAILED
+2024-12-23 00:16:54,545 - DEBUG - Asking scheduler for work...
+2024-12-23 00:16:54,548 - DEBUG - Done
+2024-12-23 00:16:54,548 - DEBUG - There are no more tasks to run at this time
+2024-12-23 00:16:54,549 - DEBUG - There are 3 pending tasks possibly being run by other workers
+2024-12-23 00:16:54,549 - DEBUG - There are 3 pending tasks unique to this worker
+2024-12-23 00:16:54,549 - DEBUG - There are 3 pending tasks last scheduled by this worker
+2024-12-23 00:16:54,550 - INFO - Worker Worker(salt=9939307206, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=114808) was stopped. Shutting down Keep-Alive thread
+2024-12-23 00:16:54,551 - INFO - 
+===== Luigi Execution Summary =====
+
+Scheduled 3 tasks of which:
+* 1 failed:
+    - 1 Extract()
+* 2 were left pending, among these:
+    * 2 had failed dependencies:
+        - 1 Load()
+        - 1 Transform()
+
+This progress looks :( because there were failed tasks
+
+===== Luigi Execution Summary =====
+
+2024-12-23 00:19:54,708 - INFO - ==================================STARTING EXTRACT DATA=======================================
+2024-12-23 00:19:54,710 - ERROR - EXTRACT 'public.customers' - FAILED.
+2024-12-23 00:19:54,753 - INFO - Extract All Tables From Sources - FAILED
+2024-12-23 00:19:54,762 - ERROR - [pid 114917] Worker Worker(salt=9277330010, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=114917) failed    Extract()
+Traceback (most recent call last):
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3303, in raw_connection
+    return self.pool.connect()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 1263, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 712, in checkout
+    rec = pool._do_get()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 179, in _do_get
+    with util.safe_reraise():
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 177, in _do_get
+    return self._create_connection()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 674, in __init__
+    self.__connect()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 900, in __connect
+    with util.safe_reraise():
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 896, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/create.py", line 643, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+  File "/home/user/.local/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/extract.py", line 56, in run
+    df = pd.read_sql_query(extract_query.format(table_name = table_name), src_engine)
+  File "/home/user/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 525, in read_sql_query
+    with pandasSQL_builder(con) as pandas_sql:
+  File "/home/user/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 906, in pandasSQL_builder
+    return SQLDatabase(con, schema, need_transaction)
+  File "/home/user/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 1636, in __init__
+    con = self.exit_stack.enter_context(con.connect())
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3279, in connect
+    return self._connection_cls(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 147, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2443, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3303, in raw_connection
+    return self.pool.connect()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 1263, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 712, in checkout
+    rec = pool._do_get()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 179, in _do_get
+    with util.safe_reraise():
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 177, in _do_get
+    return self._create_connection()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 674, in __init__
+    self.__connect()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 900, in __connect
+    with util.safe_reraise():
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 896, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/create.py", line 643, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+  File "/home/user/.local/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/extract.py", line 65, in run
+    raise Exception(f"Failed to extract '{table_name}' tables")
+Exception: Failed to extract 'public.customers' tables
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/user/.local/lib/python3.10/site-packages/luigi/worker.py", line 210, in run
+    new_deps = self._run_get_new_deps()
+  File "/home/user/.local/lib/python3.10/site-packages/luigi/worker.py", line 138, in _run_get_new_deps
+    task_gen = self.task.run()
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/extract.py", line 104, in run
+    raise Exception(f"FAILED to execute EXTRACT TASK !!!")
+Exception: FAILED to execute EXTRACT TASK !!!
+2024-12-23 00:19:54,805 - DEBUG - 1 running tasks, waiting for next task to finish
+2024-12-23 00:19:54,810 - INFO - Informed scheduler that task   Extract__99914b932b   has status   FAILED
+2024-12-23 00:19:54,811 - DEBUG - Asking scheduler for work...
+2024-12-23 00:19:54,813 - DEBUG - Done
+2024-12-23 00:19:54,813 - DEBUG - There are no more tasks to run at this time
+2024-12-23 00:19:54,814 - DEBUG - There are 3 pending tasks possibly being run by other workers
+2024-12-23 00:19:54,814 - DEBUG - There are 3 pending tasks unique to this worker
+2024-12-23 00:19:54,814 - DEBUG - There are 3 pending tasks last scheduled by this worker
+2024-12-23 00:19:54,815 - INFO - Worker Worker(salt=9277330010, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=114917) was stopped. Shutting down Keep-Alive thread
+2024-12-23 00:19:54,816 - INFO - 
+===== Luigi Execution Summary =====
+
+Scheduled 3 tasks of which:
+* 1 failed:
+    - 1 Extract()
+* 2 were left pending, among these:
+    * 2 had failed dependencies:
+        - 1 Load()
+        - 1 Transform()
+
+This progress looks :( because there were failed tasks
+
+===== Luigi Execution Summary =====
+
+2024-12-23 01:44:22,767 - INFO - ==================================STARTING EXTRACT DATA=======================================
+2024-12-23 01:44:22,798 - ERROR - EXTRACT 'public.customers' - FAILED.
+2024-12-23 01:44:22,874 - INFO - Extract All Tables From Sources - FAILED
+2024-12-23 01:44:22,892 - ERROR - [pid 472] Worker Worker(salt=989016694, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=472) failed    Extract()
+Traceback (most recent call last):
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3303, in raw_connection
+    return self.pool.connect()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 1263, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 712, in checkout
+    rec = pool._do_get()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 179, in _do_get
+    with util.safe_reraise():
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 177, in _do_get
+    return self._create_connection()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 674, in __init__
+    self.__connect()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 900, in __connect
+    with util.safe_reraise():
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 896, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/create.py", line 643, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+  File "/home/user/.local/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5440 failed: FATAL:  password authentication failed for user "postgres"
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/extract.py", line 56, in run
+    df = pd.read_sql_query(extract_query.format(table_name = table_name), src_engine)
+  File "/home/user/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 525, in read_sql_query
+    with pandasSQL_builder(con) as pandas_sql:
+  File "/home/user/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 906, in pandasSQL_builder
+    return SQLDatabase(con, schema, need_transaction)
+  File "/home/user/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 1636, in __init__
+    con = self.exit_stack.enter_context(con.connect())
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3279, in connect
+    return self._connection_cls(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 147, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2443, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3303, in raw_connection
+    return self.pool.connect()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 1263, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 712, in checkout
+    rec = pool._do_get()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 179, in _do_get
+    with util.safe_reraise():
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 177, in _do_get
+    return self._create_connection()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 674, in __init__
+    self.__connect()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 900, in __connect
+    with util.safe_reraise():
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 896, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/create.py", line 643, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+  File "/home/user/.local/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5440 failed: FATAL:  password authentication failed for user "postgres"
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/extract.py", line 65, in run
+    raise Exception(f"Failed to extract '{table_name}' tables")
+Exception: Failed to extract 'public.customers' tables
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/user/.local/lib/python3.10/site-packages/luigi/worker.py", line 210, in run
+    new_deps = self._run_get_new_deps()
+  File "/home/user/.local/lib/python3.10/site-packages/luigi/worker.py", line 138, in _run_get_new_deps
+    task_gen = self.task.run()
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/extract.py", line 104, in run
+    raise Exception(f"FAILED to execute EXTRACT TASK !!!")
+Exception: FAILED to execute EXTRACT TASK !!!
+2024-12-23 01:44:22,981 - DEBUG - 1 running tasks, waiting for next task to finish
+2024-12-23 01:44:22,989 - INFO - Informed scheduler that task   Extract__99914b932b   has status   FAILED
+2024-12-23 01:44:22,990 - DEBUG - Asking scheduler for work...
+2024-12-23 01:44:22,993 - DEBUG - Done
+2024-12-23 01:44:22,994 - DEBUG - There are no more tasks to run at this time
+2024-12-23 01:44:22,994 - DEBUG - There are 3 pending tasks possibly being run by other workers
+2024-12-23 01:44:22,995 - DEBUG - There are 3 pending tasks unique to this worker
+2024-12-23 01:44:22,996 - DEBUG - There are 3 pending tasks last scheduled by this worker
+2024-12-23 01:44:22,997 - INFO - Worker Worker(salt=989016694, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=472) was stopped. Shutting down Keep-Alive thread
+2024-12-23 01:44:23,001 - INFO - 
+===== Luigi Execution Summary =====
+
+Scheduled 3 tasks of which:
+* 1 failed:
+    - 1 Extract()
+* 2 were left pending, among these:
+    * 2 had failed dependencies:
+        - 1 Load()
+        - 1 Transform()
+
+This progress looks :( because there were failed tasks
+
+===== Luigi Execution Summary =====
+
+2024-12-23 01:45:09,651 - INFO - ==================================STARTING EXTRACT DATA=======================================
+2024-12-23 01:45:09,674 - ERROR - EXTRACT 'public.customers' - FAILED.
+2024-12-23 01:45:09,782 - INFO - Extract All Tables From Sources - FAILED
+2024-12-23 01:45:09,798 - ERROR - [pid 497] Worker Worker(salt=9835193611, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=497) failed    Extract()
+Traceback (most recent call last):
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3303, in raw_connection
+    return self.pool.connect()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 1263, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 712, in checkout
+    rec = pool._do_get()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 179, in _do_get
+    with util.safe_reraise():
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 177, in _do_get
+    return self._create_connection()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 674, in __init__
+    self.__connect()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 900, in __connect
+    with util.safe_reraise():
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 896, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/create.py", line 643, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+  File "/home/user/.local/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5440 failed: FATAL:  database "olist" does not exist
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/extract.py", line 56, in run
+    df = pd.read_sql_query(extract_query.format(table_name = table_name), src_engine)
+  File "/home/user/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 525, in read_sql_query
+    with pandasSQL_builder(con) as pandas_sql:
+  File "/home/user/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 906, in pandasSQL_builder
+    return SQLDatabase(con, schema, need_transaction)
+  File "/home/user/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 1636, in __init__
+    con = self.exit_stack.enter_context(con.connect())
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3279, in connect
+    return self._connection_cls(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 147, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2443, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3303, in raw_connection
+    return self.pool.connect()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 1263, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 712, in checkout
+    rec = pool._do_get()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 179, in _do_get
+    with util.safe_reraise():
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 177, in _do_get
+    return self._create_connection()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 674, in __init__
+    self.__connect()
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 900, in __connect
+    with util.safe_reraise():
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 896, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/create.py", line 643, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+  File "/home/user/.local/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5440 failed: FATAL:  database "olist" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/extract.py", line 65, in run
+    raise Exception(f"Failed to extract '{table_name}' tables")
+Exception: Failed to extract 'public.customers' tables
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/user/.local/lib/python3.10/site-packages/luigi/worker.py", line 210, in run
+    new_deps = self._run_get_new_deps()
+  File "/home/user/.local/lib/python3.10/site-packages/luigi/worker.py", line 138, in _run_get_new_deps
+    task_gen = self.task.run()
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/extract.py", line 104, in run
+    raise Exception(f"FAILED to execute EXTRACT TASK !!!")
+Exception: FAILED to execute EXTRACT TASK !!!
+2024-12-23 01:45:09,877 - DEBUG - 1 running tasks, waiting for next task to finish
+2024-12-23 01:45:09,883 - INFO - Informed scheduler that task   Extract__99914b932b   has status   FAILED
+2024-12-23 01:45:09,884 - DEBUG - Asking scheduler for work...
+2024-12-23 01:45:09,888 - DEBUG - Done
+2024-12-23 01:45:09,888 - DEBUG - There are no more tasks to run at this time
+2024-12-23 01:45:09,889 - DEBUG - There are 3 pending tasks possibly being run by other workers
+2024-12-23 01:45:09,890 - DEBUG - There are 3 pending tasks last scheduled by this worker
+2024-12-23 01:45:09,891 - INFO - Worker Worker(salt=9835193611, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=497) was stopped. Shutting down Keep-Alive thread
+2024-12-23 01:45:09,892 - INFO - 
+===== Luigi Execution Summary =====
+
+Scheduled 3 tasks of which:
+* 1 failed:
+    - 1 Extract()
+* 2 were left pending, among these:
+    * 2 had failed dependencies:
+        - 1 Load()
+        - 1 Transform()
+
+This progress looks :( because there were failed tasks
+
+===== Luigi Execution Summary =====
+
+2024-12-23 01:45:46,211 - INFO - ==================================STARTING EXTRACT DATA=======================================
+2024-12-23 01:45:46,269 - ERROR - EXTRACT 'public.customers' - FAILED.
+2024-12-23 01:45:46,318 - INFO - Extract All Tables From Sources - FAILED
+2024-12-23 01:45:46,328 - ERROR - [pid 516] Worker Worker(salt=874655761, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=516) failed    Extract()
+Traceback (most recent call last):
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1970, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedTable: relation "public.customers" does not exist
+LINE 1: SELECT * FROM public.customers;
+                      ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/extract.py", line 56, in run
+    df = pd.read_sql_query(extract_query.format(table_name = table_name), src_engine)
+  File "/home/user/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 526, in read_sql_query
+    return pandas_sql.read_query(
+  File "/home/user/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 1836, in read_query
+    result = self.execute(sql, params)
+  File "/home/user/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 1659, in execute
+    return self.con.exec_driver_sql(sql, *args)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1782, in exec_driver_sql
+    ret = self._execute_context(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1849, in _execute_context
+    return self._exec_single_context(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1989, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2356, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1970, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedTable) relation "public.customers" does not exist
+LINE 1: SELECT * FROM public.customers;
+                      ^
+
+[SQL: SELECT * FROM public.customers;]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/extract.py", line 65, in run
+    raise Exception(f"Failed to extract '{table_name}' tables")
+Exception: Failed to extract 'public.customers' tables
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/user/.local/lib/python3.10/site-packages/luigi/worker.py", line 210, in run
+    new_deps = self._run_get_new_deps()
+  File "/home/user/.local/lib/python3.10/site-packages/luigi/worker.py", line 138, in _run_get_new_deps
+    task_gen = self.task.run()
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/extract.py", line 104, in run
+    raise Exception(f"FAILED to execute EXTRACT TASK !!!")
+Exception: FAILED to execute EXTRACT TASK !!!
+2024-12-23 01:45:46,380 - DEBUG - 1 running tasks, waiting for next task to finish
+2024-12-23 01:45:46,386 - INFO - Informed scheduler that task   Extract__99914b932b   has status   FAILED
+2024-12-23 01:45:46,387 - DEBUG - Asking scheduler for work...
+2024-12-23 01:45:46,391 - DEBUG - Done
+2024-12-23 01:45:46,392 - DEBUG - There are no more tasks to run at this time
+2024-12-23 01:45:46,393 - DEBUG - There are 3 pending tasks possibly being run by other workers
+2024-12-23 01:45:46,393 - DEBUG - There are 3 pending tasks last scheduled by this worker
+2024-12-23 01:45:46,394 - INFO - Worker Worker(salt=874655761, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=516) was stopped. Shutting down Keep-Alive thread
+2024-12-23 01:45:46,396 - INFO - 
+===== Luigi Execution Summary =====
+
+Scheduled 3 tasks of which:
+* 1 failed:
+    - 1 Extract()
+* 2 were left pending, among these:
+    * 2 had failed dependencies:
+        - 1 Load()
+        - 1 Transform()
+
+This progress looks :( because there were failed tasks
+
+===== Luigi Execution Summary =====
+
+2024-12-23 02:59:27,881 - INFO - ==================================STARTING EXTRACT DATA=======================================
+2024-12-23 02:59:27,931 - ERROR - EXTRACT 'public.customers' - FAILED.
+2024-12-23 02:59:27,987 - INFO - Extract All Tables From Sources - FAILED
+2024-12-23 02:59:27,997 - ERROR - [pid 787] Worker Worker(salt=2783360370, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=787) failed    Extract()
+Traceback (most recent call last):
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1970, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedTable: relation "public.customers" does not exist
+LINE 1: SELECT * FROM public.customers;
+                      ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/extract.py", line 56, in run
+    df = pd.read_sql_query(extract_query.format(table_name = table_name), src_engine)
+  File "/home/user/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 526, in read_sql_query
+    return pandas_sql.read_query(
+  File "/home/user/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 1836, in read_query
+    result = self.execute(sql, params)
+  File "/home/user/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 1659, in execute
+    return self.con.exec_driver_sql(sql, *args)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1782, in exec_driver_sql
+    ret = self._execute_context(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1849, in _execute_context
+    return self._exec_single_context(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1989, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2356, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1970, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedTable) relation "public.customers" does not exist
+LINE 1: SELECT * FROM public.customers;
+                      ^
+
+[SQL: SELECT * FROM public.customers;]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/extract.py", line 65, in run
+    raise Exception(f"Failed to extract '{table_name}' tables")
+Exception: Failed to extract 'public.customers' tables
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/user/.local/lib/python3.10/site-packages/luigi/worker.py", line 210, in run
+    new_deps = self._run_get_new_deps()
+  File "/home/user/.local/lib/python3.10/site-packages/luigi/worker.py", line 138, in _run_get_new_deps
+    task_gen = self.task.run()
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/extract.py", line 104, in run
+    raise Exception(f"FAILED to execute EXTRACT TASK !!!")
+Exception: FAILED to execute EXTRACT TASK !!!
+2024-12-23 02:59:28,045 - DEBUG - 1 running tasks, waiting for next task to finish
+2024-12-23 02:59:28,051 - INFO - Informed scheduler that task   Extract__99914b932b   has status   FAILED
+2024-12-23 02:59:28,052 - DEBUG - Asking scheduler for work...
+2024-12-23 02:59:28,054 - DEBUG - Done
+2024-12-23 02:59:28,054 - DEBUG - There are no more tasks to run at this time
+2024-12-23 02:59:28,054 - DEBUG - There are 3 pending tasks possibly being run by other workers
+2024-12-23 02:59:28,055 - DEBUG - There are 3 pending tasks unique to this worker
+2024-12-23 02:59:28,055 - DEBUG - There are 3 pending tasks last scheduled by this worker
+2024-12-23 02:59:28,055 - INFO - Worker Worker(salt=2783360370, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=787) was stopped. Shutting down Keep-Alive thread
+2024-12-23 02:59:28,056 - INFO - 
+===== Luigi Execution Summary =====
+
+Scheduled 3 tasks of which:
+* 1 failed:
+    - 1 Extract()
+* 2 were left pending, among these:
+    * 2 had failed dependencies:
+        - 1 Load()
+        - 1 Transform()
+
+This progress looks :( because there were failed tasks
+
+===== Luigi Execution Summary =====
+
