@@ -1,1 +1,2 @@
 init.sql filter=lfs diff=lfs merge=lfs -text
+helper/source_init/init.sql filter=lfs diff=lfs merge=lfs -text

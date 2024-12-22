@@ -1,5 +1,20 @@
 # Olist Data Warehouse: Slowly Changing Dimensions (SCD) and ELT Pipeline
 
+# Table of Contents
+1. [Overview](#overview)
+2. [Requirements Gathering](#requirements-gathering)
+3. [Slowly Changing Dimension (SCD)](#slowly-changing-dimension-scd)
+   1. [Strategy](#strategy)
+4. [ELT with Python & SQL](#elt-with-python--sql)
+   1. [Workflow Description](#workflow-description)
+   2. [Setup and Execution](#setup-and-execution)
+   3. [Code Highlights](#code-highlights)
+5. [Orchestrate ELT with Luigi](#orchestrate-elt-with-luigi)
+   1. [Setup Instructions](#setup-instructions)
+6. [Requirements](#requirements)
+
+---
+
 ## Overview
 This project implements a Data Warehouse (DWH) for Olist, leveraging Slowly Changing Dimensions (SCD) strategies and an ELT pipeline using Python, SQL, and Luigi for orchestration.
 
@@ -49,7 +64,7 @@ The ELT pipeline consists of three main steps:
 3. **Load:** Load transformed data into the DWH PostgreSQL database.
 
 ### Setup and Execution
-1. Clone the repository.
+1. Clone the repository (using git lfs clone).
 2. Create a `.env` file with the following variables:
 
 ```env
@@ -89,47 +104,6 @@ Luigi is used for orchestration and scheduling:
 1. Install Luigi via `pip install luigi`.
 2. Run the Luigi scheduler: `luigid`.
 3. Execute tasks: `python elt_main.py`.
-
-## Directory Structure
-```
-├── dataset-olist
-├── env
-├── helper
-│   ├── dwh_final_schema.sql
-│   ├── dwh_init_schema.sql
-│   ├── dwh_src_init_schema.sql
-│   └── source_init.sql
-├── logs
-│   └── pipeline
-├── sic_query
-│   ├── extract
-│   │   ├── all-tables.sql
-│   │   ├── source-truncate_tables.sql
-│   │   ├── stg-customers.sql
-│   │   ├── stg-order_items.sql
-│   │   ├── stg-order_payments.sql
-│   │   ├── stg-order_reviews.sql
-│   │   ├── stg-orders.sql
-│   │   ├── stg-products.sql
-│   │   └── stg-sellers.sql
-│   ├── load
-│   ├── transform
-│   │   ├── concat_dataframe.py
-│   │   ├── copy_log.py
-│   │   ├── db_conn.py
-│   │   ├── delete_temp_data.py
-│   │   ├── read_sql.py
-│   │   ├── extract.py
-│   │   ├── load.py
-│   │   ├── transform.py
-│   └── utils
-│       ├── data
-│       └── log
-├── elt_main.py
-├── pipeline_summary.csv
-├── requirements.txt
-└── docker-compose.yml
-```
 
 ## Requirements
 Install dependencies with:
