@@ -84,21 +84,28 @@ SRC_POSTGRES_USER=[YOUR USERNAME]
 SRC_POSTGRES_PASSWORD=[YOUR PASSWORD]
 SRC_POSTGRES_PORT=[YOUR PORT]
 
+# SENTRY DSN
+SENTRY_DSN=... # Fill with your Sentry DSN Project 
+
 # DWH
-DWH_POSTGRES_DB=olist-dwh
-DWH_POSTGRES_HOST=localhost
-DWH_POSTGRES_USER=[YOUR USERNAME]
-DWH_POSTGRES_PASSWORD=[YOUR PASSWORD]
-DWH_POSTGRES_PORT=[YOUR PORT]
+# Adjust with your directory. make sure to write full path
+# Remove comment after each value
+DIR_ROOT_PROJECT=... # <project_dir>
+DIR_TEMP_LOG=... # <project_dir>/pipeline/temp/log
+DIR_TEMP_DATA=... # <project_dir>/pipeline/temp/data
+DIR_EXTRACT_QUERY=... # <project_dir>/pipeline/src_query/extract
+DIR_LOAD_QUERY=... # <project_dir>/pipeline/src_query/load
+DIR_TRANSFORM_QUERY=... # <project_dir>/pipeline/src_query/transform
+DIR_LOG=... # <project_dir>/logs/
 ```
 
 3. Ensure the `/helper/source/init.sql` script has the data preloaded.
 4. Run `elt_main.py` to execute the pipeline.
-5. Monitor logs in the `/logs/pipeline/` directory for any errors.
+5. Monitor logs in the `/logs/logs.log/` directory for any errors.
 
 **Run this command on the background process:**
 ```bash
-luigid --port 8082 &
+luigid --port 8082
 ```
 
 **To run the pipeline directly from the terminal:**
@@ -116,19 +123,6 @@ python3 elt_main.py
 - **Error Handling:** Alerts for pipeline errors.
 - **Logging:** Comprehensive logs for each pipeline step.
 
-## Orchestrate ELT with Luigi
-Luigi is used for orchestration and scheduling:
-- **Tasks:** 
-  - Extract data.
-  - Transform data with SCD logic.
-  - Load data into the DWH.
-- **Scheduling:** Configure tasks to run at desired intervals (e.g., using `cron`).
-
-### Setup Instructions
-1. Install Luigi via `pip install luigi`.
-2. Run the Luigi scheduler: `luigid`.
-3. Execute tasks: `python elt_main.py`.
-
 ## Requirements
 Install dependencies with:
 ```bash
@@ -140,4 +134,3 @@ pip install -r requirements.txt
 2. **Slowly Changing Dimensions (SCD) Overview**: Kimball, Ralph. *The Data Warehouse Toolkit: The Definitive Guide to Dimensional Modeling*. Wiley, 2013.
 3. **PostgreSQL Documentation**: [https://www.postgresql.org/docs/](https://www.postgresql.org/docs/)
 4. **Sentry SDK for Python**: [https://docs.sentry.io/platforms/python/](https://docs.sentry.io/platforms/python/)
-```
