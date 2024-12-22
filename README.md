@@ -46,7 +46,7 @@ Below are some of the most critical questions and answers gathered during the re
    SCD Type 2 is ideal for customers and sellers to track changes in details like address or state over time.
 
 8. **Should order statuses be subject to historical tracking?**  
-   Yes, tracking the full lifecycle of an order—statuses like "approved," "shipped," and "delivered" is essential for analyzing the delivery process and identifying potential delays. We want to see the full journey of an order, like when it was approved, shipped, and delivered. This helps us understand the delivery process and where delays might occur.
+   Yes, tracking the full lifecycle of an order statuses like "approved," "shipped," and "delivered" is essential for analyzing the delivery process and identifying potential delays. We want to see the full journey of an order, like when it was approved, shipped, and delivered. This helps us understand the delivery process and where delays might occur.
 
 ## Slowly Changing Dimension (SCD)
 ### Strategy
