@@ -134,3 +134,11 @@ pip install -r requirements.txt
 2. **Slowly Changing Dimensions (SCD) Overview**: Kimball, Ralph. *The Data Warehouse Toolkit: The Definitive Guide to Dimensional Modeling*. Wiley, 2013.
 3. **PostgreSQL Documentation**: [https://www.postgresql.org/docs/](https://www.postgresql.org/docs/)
 4. **Sentry SDK for Python**: [https://docs.sentry.io/platforms/python/](https://docs.sentry.io/platforms/python/)
+
+
+## Documentation
+
+![ELT Pipeline Logs](img_assets/logs.png)
+
+
+![ELT Pipeline Using Luigi](img_assets/luigi_8082.png)
