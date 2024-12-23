@@ -6,7 +6,7 @@ USING (
         p.product_weight_g, 
         p.product_length_cm, 
         p.product_height_cm, 
-        p.product_width_cm,
+        p.product_width_cm
     FROM public.products p
     LEFT JOIN public.product_category_name_translation pcat
         ON p.product_category_name = pcat.product_category_name
