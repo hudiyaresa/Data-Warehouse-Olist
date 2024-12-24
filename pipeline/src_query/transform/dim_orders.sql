@@ -19,7 +19,7 @@ WHEN MATCHED AND (
         current_flag = 'Expired',
         updated_at = CURRENT_TIMESTAMP
 
-WHEN NOT MATCHED BY SOURCE THEN
+WHEN NOT MATCHED THEN
     INSERT (
         order_id, 
         order_nk, 
