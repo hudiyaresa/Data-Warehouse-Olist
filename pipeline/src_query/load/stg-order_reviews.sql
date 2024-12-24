@@ -1,4 +1,4 @@
-MERGE INTO stg.order_reviews_dim AS staging
+MERGE INTO stg.order_reviews AS staging
 USING public.order_reviews AS source
 ON staging.review_id = source.review_id AND staging.order_id = source.order_id
 

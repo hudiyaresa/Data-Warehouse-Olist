@@ -1,4 +1,4 @@
-MERGE INTO stg.order_payments_dim AS staging
+MERGE INTO stg.order_payments AS staging
 USING (
     SELECT 
         op.order_id,

@@ -1,4 +1,4 @@
-MERGE INTO stg.orders_dim AS staging
+MERGE INTO stg.orders AS staging
 USING (
     SELECT 
         o.order_id,

@@ -1,4 +1,4 @@
-MERGE INTO stg.orders_dim AS final
+MERGE INTO final.dim_orders AS final
 USING (
     SELECT 
         order_id AS order_nk,

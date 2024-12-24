@@ -1,4 +1,4 @@
-MERGE INTO stg.customers_dim AS staging
+MERGE INTO stg.customers AS staging
 USING (
     SELECT 
         c.customer_id,
