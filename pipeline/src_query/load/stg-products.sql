@@ -32,7 +32,7 @@ WHEN MATCHED AND (
         staging.updated_at = CURRENT_TIMESTAMP
 
 -- When not matched, insert new record
-WHEN NOT MATCHED BY TARGET THEN
+WHEN NOT MATCHED BY SOURCE THEN
     INSERT (
         product_id, 
         product_category_name, 
