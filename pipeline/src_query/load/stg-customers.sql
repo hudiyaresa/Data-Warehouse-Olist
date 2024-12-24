@@ -25,7 +25,7 @@ WHEN MATCHED AND (
         current_flag = 'Expired',
         updated_at = CURRENT_TIMESTAMP
 
-WHEN NOT MATCHED BY SOURCE OR staging.current_flag = 'Expired' THEN
+WHEN NOT MATCHED BY SOURCE THEN
     INSERT (
         customer_id, 
         customer_zip_code_prefix, 
