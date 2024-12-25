@@ -23,7 +23,7 @@ WHEN MATCHED AND (
 WHEN NOT MATCHED THEN
     INSERT (
         order_id, 
-        customer_nk, 
+        customer_id, 
         order_status, 
         order_purchase_timestamp,
         created_at, 

@@ -42,7 +42,7 @@ DROP TABLE IF EXISTS final.dim_products;
 CREATE TABLE final.dim_products (
     product_id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
     product_name_length INT,
-    product_description_length INT,
+    product_description_lenght INT,
     product_photos_qty INT,
     product_weight_g NUMERIC(10, 2),
     product_length_cm NUMERIC(10, 2),
@@ -125,12 +125,12 @@ CREATE TABLE final.fct_customer_orders (
     order_item_id INT,
     seller_id INT REFERENCES dim_sellers(seller_id),
     order_purchase_timestamp TIMESTAMP,
-    payment_sequential INT REFERENCES dim_order_payments(payment_sequential),
+    FOREIGN KEY (order_id, payment_sequential) REFERENCES dim_order_payments(order_id, payment_sequential),
     date_id INT REFERENCES dim_date(date_id)
 );
 
 -- Fct Table Seller Processes Orders
-DROP TABLE if exists final.fct_seller_processes_orders;
+DROP TABLE IF EXISTS final.fct_seller_processes_orders;
 CREATE TABLE final.fct_seller_processes_orders (
     seller_processes_id SERIAL PRIMARY KEY,
     seller_id INT REFERENCES dim_sellers(seller_id),
@@ -154,7 +154,9 @@ CREATE TABLE final.fct_customer_review_delivered_products (
     product_id INT REFERENCES dim_products(product_id),
     seller_id INT REFERENCES dim_sellers(seller_id),
     date_id INT REFERENCES dim_date(date_id),
-    review_id INT REFERENCES dim_order_reviews(review_id),
+    review_id INT,
+    order_id INT,
+    FOREIGN KEY (review_id, order_id) REFERENCES dim_order_reviews(review_id, order_id),
     review_score INT,
     review_comment_title VARCHAR(255),
     review_comment_message TEXT,

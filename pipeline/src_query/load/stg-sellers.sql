@@ -29,8 +29,8 @@ WHEN NOT MATCHED THEN
     INSERT (
         seller_id, 
         seller_zip_code_prefix, 
-        geolocation_lat, 
-        geolocation_long,
+        latitude, 
+        longitude,
         seller_city, 
         seller_state, 
         created_at, 

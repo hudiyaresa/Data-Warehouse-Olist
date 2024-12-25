@@ -32,16 +32,18 @@ WITH
     final_fct_customer_orders AS (
         SELECT
             do.customer_id,
+            do.customer_unique_id,
             dp.product_id,
             ds.seller_id,
             do.order_id,
+            do.order_item_id,
             dd.date_id,
             dop.payment_method_id,
             do.order_purchase_timestamp,
             do.order_status,
             dop.payment_type,
             dop.payment_value,
-            updated_at
+            -- updated_at
         FROM final.stg_orders do
         JOIN dim_customers dc ON dc.customer_id = do.customer_id
         JOIN dim_products dp ON dp.product_id = do.product_id
@@ -51,8 +53,18 @@ WITH
     )
 
 INSERT INTO final.fct_Customer_Order_Products (
-    customer_id, product_id, seller_id, order_id, date_id, payment_method_id,
-    order_purchase_timestamp, order_status, payment_type, payment_value
+    customer_id,
+    customer_unique_id,
+    product_id, 
+    seller_id, 
+    order_id,
+    order_item_id,
+    date_id, 
+    payment_method_id,
+    order_purchase_timestamp, 
+    order_status, 
+    payment_type, 
+    payment_value
 )
 SELECT * FROM final_fct_customer_orders
 ON CONFLICT (customer_id, order_id) 

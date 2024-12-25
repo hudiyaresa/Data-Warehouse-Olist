@@ -11,7 +11,7 @@ USING (
 ) AS staging
 
 ON final.payment_sequential_id = staging.payment_sequential_id
-    AND final.order_id = staging.order_id
+    AND final.order_nk = staging.order_id
 
 WHEN MATCHED AND (
     final.payment_installments <> staging.payment_installments OR
@@ -28,7 +28,7 @@ WHEN NOT MATCHED THEN
         payment_sequential, 
         payment_installments, 
         payment_value, 
-        order_id, 
+        order_nk, 
         payment_type, 
         created_at, 
         updated_at, 

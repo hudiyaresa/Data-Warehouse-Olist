@@ -6,9 +6,9 @@ WHEN MATCHED THEN
     UPDATE SET
         price = staging.price,
         freight_value = staging.freight_value,
-        order_id = staging.order_id,
+        order_nk = staging.order_id,
         product_id = staging.product_id,
-        seller_id = staging.seller_id,
+        seller_nk = staging.seller_id,
         shipping_limit_date = staging.shipping_limit_date,
         updated_at = CURRENT_TIMESTAMP
 
@@ -18,9 +18,9 @@ WHEN NOT MATCHED THEN
         order_item_nk, 
         price, 
         freight_value, 
-        order_id, 
+        order_nk, 
         product_id, 
-        seller_id, 
+        seller_nk, 
         shipping_limit_date, 
         created_at, 
         updated_at
