@@ -2,7 +2,7 @@ MERGE INTO final.dim_orders AS final
 USING (
     SELECT 
         order_id AS order_nk,
-        customer_id,
+        customer_id AS customer_nk,
         order_status,
         order_purchase_timestamp,
         CURRENT_TIMESTAMP AS created_at
@@ -23,7 +23,7 @@ WHEN NOT MATCHED THEN
     INSERT (
         order_id, 
         order_nk, 
-        customer_id, 
+        customer_nk, 
         order_status, 
         order_purchase_timestamp,
         created_at, 

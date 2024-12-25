@@ -59,7 +59,7 @@ DROP TABLE IF EXISTS final.dim_orders;
 CREATE TABLE final.dim_orders (
     order_id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
     order_nk VARCHAR(255) NOT NULL,
-    customer_id UUID NOT NULL REFERENCES customer(customer_id),
+    customer_nk UUID NOT NULL REFERENCES dim_customers(customer_nk),
     order_status VARCHAR(50),
     order_purchase_timestamp TIMESTAMP NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -74,9 +74,9 @@ CREATE TABLE final.dim_order_items (
     order_item_nk VARCHAR(255) NOT NULL UNIQUE,
     price NUMERIC(10, 2) NOT NULL,
     freight_value NUMERIC(10, 2),
-    order_id UUID NOT NULL REFERENCES orders(order_id),
-    product_id UUID NOT NULL REFERENCES product(product_id),
-    seller_id UUID NOT NULL REFERENCES seller(seller_id),
+    order_nk INT NOT NULL REFERENCES dim_orders(order_nk),
+    product_id INT NOT NULL REFERENCES dim_products(product_id),
+    seller_nk INT NOT NULL REFERENCES dim_sellers(seller_nk),
     shipping_limit_date TIMESTAMP,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -89,7 +89,7 @@ CREATE TABLE final.dim_order_payments (
     payment_sequential INT NOT NULL,
     payment_installments INT NOT NULL,
     payment_value NUMERIC(10, 2) NOT NULL,
-    order_id UUID NOT NULL REFERENCES orders(order_id),
+    order_nk INT NOT NULL REFERENCES orders(order_nk),
     payment_type VARCHAR(50),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -125,7 +125,7 @@ CREATE TABLE final.fct_customer_orders (
     order_item_id INT,
     seller_id INT REFERENCES dim_sellers(seller_id),
     order_purchase_timestamp TIMESTAMP,
-    payment_method_id INT REFERENCES dim_order_payments(payment_method_id),
+    payment_sequential INT REFERENCES dim_order_payments(payment_sequential),
     date_id INT REFERENCES dim_date(date_id)
 );
 
