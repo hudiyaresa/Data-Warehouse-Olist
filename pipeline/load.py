@@ -94,14 +94,6 @@ class Load(luigi.Task):
             products_data = pd.read_csv(self.input()[7].path)
             sellers_data = pd.read_csv(self.input()[8].path)
             
-            
-            
-            
-            
-            
-            
-            
-            
             logging.info(f"Read Extracted Data - SUCCESS")
             
         except Exception:
