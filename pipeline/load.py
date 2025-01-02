@@ -129,9 +129,8 @@ class Load(luigi.Task):
                         # Execute each query
             for query in truncate_query:
                 query = sqlalchemy.text(query)
-                session.execute(query)
-                
-            session.commit()
+                session.execute(query)                
+                session.commit()
             
             # Close session
             session.close()
@@ -157,7 +156,7 @@ class Load(luigi.Task):
                                     if_exists = 'append', 
                                     index = False, 
                                     schema = 'public')
-                logging.info(f"LOAD 'sources.geolocation' - SUCCESS")
+                logging.info(f"LOAD 'public.geolocation' - SUCCESS")
 
                 # Load product_category_name_translation tables
                 product_category_name_data.to_sql('product_category_name_translation', 
@@ -165,7 +164,7 @@ class Load(luigi.Task):
                                     if_exists = 'append', 
                                     index = False, 
                                     schema = 'public')
-                logging.info(f"LOAD 'sources.product_category_name_translation' - SUCCESS")
+                logging.info(f"LOAD 'public.product_category_name_translation' - SUCCESS")
 
 
                 # Load customers data tables
@@ -174,7 +173,7 @@ class Load(luigi.Task):
                                     if_exists = 'append', 
                                     index = False, 
                                     schema = 'public')
-                logging.info(f"LOAD 'sources.customers' - SUCCESS")
+                logging.info(f"LOAD 'public.customers' - SUCCESS")
                 
                 
                 # Load sellers data tables
@@ -183,7 +182,7 @@ class Load(luigi.Task):
                                     if_exists = 'append', 
                                     index = False, 
                                     schema = 'public')
-                logging.info(f"LOAD 'sources.sellers' - SUCCESS")
+                logging.info(f"LOAD 'public.sellers' - SUCCESS")
 
 
                 # Load products tables
@@ -192,7 +191,7 @@ class Load(luigi.Task):
                             if_exists = 'append', 
                             index = False, 
                             schema = 'public')
-                logging.info(f"LOAD 'sources.products' - SUCCESS")
+                logging.info(f"LOAD 'public.products' - SUCCESS")
                 
                 
                 # Load orders tables
@@ -201,7 +200,7 @@ class Load(luigi.Task):
                                 if_exists = 'append', 
                                 index = False, 
                                 schema = 'public')
-                logging.info(f"LOAD 'sources.orders' - SUCCESS")
+                logging.info(f"LOAD 'public.orders' - SUCCESS")
                 
                               
                 
@@ -211,7 +210,7 @@ class Load(luigi.Task):
                             if_exists = 'append', 
                             index = False, 
                             schema = 'public')
-                logging.info(f"LOAD 'sources.order_items' - SUCCESS")
+                logging.info(f"LOAD 'public.order_items' - SUCCESS")
                 
                 
                 # Load order_payments tables
@@ -220,7 +219,7 @@ class Load(luigi.Task):
                             if_exists = 'append', 
                             index = False, 
                             schema = 'public')
-                logging.info(f"LOAD 'sources.order_payments' - SUCCESS")
+                logging.info(f"LOAD 'public.order_payments' - SUCCESS")
                 
                                 
                 # Load order_reviews tables
@@ -229,12 +228,12 @@ class Load(luigi.Task):
                                     if_exists = 'append', 
                                     index = False, 
                                     schema = 'public')
-                logging.info(f"LOAD 'sources.order_reviews' - SUCCESS")
-                logging.info(f"LOAD All Tables To DWH-sources - SUCCESS")
+                logging.info(f"LOAD 'public.order_reviews' - SUCCESS")
+                logging.info(f"LOAD All Tables To DWH-public - SUCCESS")
                 
             except Exception:
-                logging.error(f"LOAD All Tables To DWH-sources - FAILED")
-                raise Exception('Failed Load Tables To DWH-sources')
+                logging.error(f"LOAD All Tables To DWH-public - FAILED")
+                raise Exception('Failed Load Tables To DWH-public')
             
             #----------------------------------------------------------------------------------------------------------------------------------------
             # Load to staging schema
