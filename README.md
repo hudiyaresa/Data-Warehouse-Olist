@@ -67,8 +67,8 @@ Based on the gathered requirements, the following SCD strategies will be applied
 ### Workflow Description
 The ELT pipeline consists of three main steps:
 1. **Extract:** Fetch data from the source PostgreSQL database.
-2. **Transform:** Apply transformations, including SCD handling.
-3. **Load:** Load transformed data into the DWH PostgreSQL database.
+2. **Load:** Load transformed data into the DWH PostgreSQL database.
+3. **Transform:** Apply transformations, including SCD handling.
 
 ![ELT Pipeline](img_assets/ELT_Illustration.png)
 
