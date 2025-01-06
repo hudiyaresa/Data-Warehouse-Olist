@@ -36,12 +36,17 @@ class Load(luigi.Task):
             # Read query to truncate sources schema in dwh
             truncate_query = read_sql_file(
                 file_path = f'{DIR_LOAD_QUERY}/source-truncate_tables.sql'
-                )
+            )
+            logging.error(f"truncate query {truncate_query}")
         
             # Read load query to staging schema
             geolocation_query = read_sql_file(
                 file_path = f'{DIR_LOAD_QUERY}/stg-geolocation.sql'
             )                    
+
+            product_category_name_query = read_sql_file(
+                file_path = f'{DIR_LOAD_QUERY}/stg-product_category_name.sql'
+            )
 
             customers_query = read_sql_file(
                 file_path = f'{DIR_LOAD_QUERY}/stg-customers.sql'
@@ -49,10 +54,6 @@ class Load(luigi.Task):
 
             sellers_query = read_sql_file(
                 file_path = f'{DIR_LOAD_QUERY}/stg-sellers.sql'
-            )
-
-            product_category_name_query = read_sql_file(
-                file_path = f'{DIR_LOAD_QUERY}/stg-product_category_name.sql'
             )
 
             products_query = read_sql_file(
@@ -84,15 +85,15 @@ class Load(luigi.Task):
         # Read Data to be load
         try:
             # Read csv
-            customers_data = pd.read_csv(self.input()[0].path)
-            geolocation_data = pd.read_csv(self.input()[1].path)
+            geolocation_data = pd.read_csv(self.input()[0].path)
+            customers_data = pd.read_csv(self.input()[1].path)
+            sellers_data = pd.read_csv(self.input()[2].path)
             order_items_data = pd.read_csv(self.input()[2].path)
             order_payments_data = pd.read_csv(self.input()[3].path)
             order_reviews_data = pd.read_csv(self.input()[4].path)
             orders_data = pd.read_csv(self.input()[5].path)
             product_category_name_data = pd.read_csv(self.input()[6].path)
             products_data = pd.read_csv(self.input()[7].path)
-            sellers_data = pd.read_csv(self.input()[8].path)
             
             logging.info(f"Read Extracted Data - SUCCESS")
             
@@ -126,10 +127,10 @@ class Load(luigi.Task):
             Session = sessionmaker(bind = dwh_engine)
             session = Session()
 
-                        # Execute each query
+            # Execute each query
             for query in truncate_query:
                 query = sqlalchemy.text(query)
-                session.execute(query)                
+                session.execute(query)
                 session.commit()
             
             # Close session
@@ -239,8 +240,8 @@ class Load(luigi.Task):
             # Load to staging schema
             try:
                 # List query
-                load_stg_queries = [geolocation_query, customers_query, 
-                                    sellers_query, product_category_name_query, 
+                load_stg_queries = [geolocation_query, product_category_name_query, customers_query, 
+                                    sellers_query, 
                                     products_query, orders_query, order_items_query,
                                     order_payments_query, order_reviews_query]
                 
@@ -252,8 +253,7 @@ class Load(luigi.Task):
                 for query in load_stg_queries:
                     query = sqlalchemy.text(query)
                     session.execute(query)
-                    
-                session.commit()
+                    session.commit()
                 
                 # Close session
                 session.close()
