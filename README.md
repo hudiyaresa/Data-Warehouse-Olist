@@ -70,7 +70,7 @@ The ELT pipeline consists of three main steps:
 2. **Load:** Load transformed data into the DWH PostgreSQL database.
 3. **Transform:** Apply transformations, including SCD handling.
 
-
+![ELT Pipeline](img_assets/ELT_Illustration.png)
 
 ### Setup and Execution
 1. Clone the repository (using git lfs clone).
