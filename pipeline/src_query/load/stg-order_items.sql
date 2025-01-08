@@ -1,35 +1,33 @@
-MERGE INTO stg.order_items AS staging
-USING public.order_items AS source
-ON staging.order_id = source.order_id AND staging.order_item_id = source.order_item_id
+INSERT INTO stg.order_items
+    (order_id, order_item_id, product_id, seller_id, shipping_limit_date, price, freight_value)
+    
+SELECT
+    order_id,
+    order_item_id,
+    product_id,
+    seller_id,
+    shipping_limit_date,
+    price,
+    freight_value
 
-WHEN MATCHED THEN
-    UPDATE SET
-        seller_id = source.seller_id,
-        shipping_limit_date = source.shipping_limit_date,
-        price = source.price,
-        freight_value = source.freight_value,
-        updated_at = CURRENT_TIMESTAMP
+FROM public.order_items
 
-WHEN NOT MATCHED THEN
-    INSERT (
-        order_id,
-        order_item_id, 
-        product_id, 
-        seller_id, 
-        shipping_limit_date, 
-        price, 
-        freight_value, 
-        created_at, 
-        updated_at
-    )
-    VALUES (
-        source.order_id,
-        source.order_item_id, 
-        source.product_id, 
-        source.seller_id, 
-        source.shipping_limit_date,
-        source.price, 
-        source.freight_value, 
-        CURRENT_TIMESTAMP, 
-        CURRENT_TIMESTAMP
-    );
+ON CONFLICT(order_id, order_item_id)
+DO UPDATE SET
+    product_id = EXCLUDED.product_id,
+    seller_id = EXCLUDED.seller_id,
+    shipping_limit_date = EXCLUDED.shipping_limit_date,
+    price = EXCLUDED.price,
+    freight_value = EXCLUDED.freight_value,
+
+    updated_at = CASE WHEN
+                        stg.order_items.product_id <> EXCLUDED.product_id
+                        OR stg.order_items.seller_id <> EXCLUDED.seller_id
+                        OR stg.order_items.shipping_limit_date <> EXCLUDED.shipping_limit_date
+                        OR stg.order_items.price <> EXCLUDED.price
+                        OR stg.order_items.freight_value <> EXCLUDED.freight_value
+                THEN
+                        CURRENT_TIMESTAMP
+                ELSE
+                        stg.order_items.updated_at
+                END;

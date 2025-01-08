@@ -1,22 +1,20 @@
-MERGE INTO stg.product_category_name AS staging
-USING public.product_category_name AS source
-ON staging.product_category_name = source.product_category_name
+INSERT INTO stg.product_category_name_translation 
+    (product_category_name, product_category_name_english) 
 
-WHEN MATCHED THEN
-    UPDATE SET
-        product_category_name_english = source.product_category_name_english,
-        updated_at = CURRENT_TIMESTAMP
+SELECT
+    product_category_name,
+    product_category_name_english
 
-WHEN NOT MATCHED THEN
-    INSERT (
-        product_category_name,
-        product_category_name_english, 
-        created_at, 
-        updated_at
-    )
-    VALUES (
-        source.product_category_name,
-        source.product_category_name_english, 
-        CURRENT_TIMESTAMP, 
-        CURRENT_TIMESTAMP
-    );
+FROM public.product_category_name_translation
+
+ON CONFLICT(product_category_name) 
+DO UPDATE SET
+    product_category_name_english = EXCLUDED.product_category_name_english,
+
+    updated_at = CASE WHEN 
+                        stg.product_category_name_translation.product_category_name_english <> EXCLUDED.product_category_name_english 
+                THEN
+                        CURRENT_TIMESTAMP
+                ELSE
+                        stg.product_category_name_translation.updated_at
+                END;

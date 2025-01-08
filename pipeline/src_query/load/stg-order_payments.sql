@@ -1,46 +1,29 @@
-MERGE INTO stg.order_payments AS staging
-USING (
-    SELECT 
-        op.order_id,
-        op.payment_sequential,
-        op.payment_type,
-        op.payment_installments,
-        op.payment_value,
-        CURRENT_TIMESTAMP AS created_at
-    FROM public.order_payments op
-) AS source
+INSERT INTO stg.order_payments
+    (order_id, payment_sequential, payment_type, payment_installments, payment_value)
+    
+SELECT
+    order_id,
+    payment_sequential,
+    payment_type,
+    payment_installments,
+    payment_value
 
--- check similarity of composite key
-ON staging.order_id = source.order_id 
-   AND staging.payment_sequential = source.payment_sequential
+FROM public.order_payments
 
-WHEN MATCHED AND (
-    staging.payment_type <> source.payment_type OR
-    staging.payment_installments <> source.payment_installments OR
-    staging.payment_value <> source.payment_value
-) THEN
-    UPDATE SET 
-        current_flag = 'Expired',
-        updated_at = CURRENT_TIMESTAMP
+ON CONFLICT(order_id, payment_sequential)
+DO UPDATE SET
+    payment_sequential = EXCLUDED.payment_sequential,
+    payment_type = EXCLUDED.payment_type,
+    payment_installments = EXCLUDED.payment_installments,
+    payment_value = EXCLUDED.payment_value,
 
-WHEN NOT MATCHED THEN
-    INSERT (
-        order_id, 
-        payment_sequential, 
-        payment_type, 
-        payment_installments,
-        payment_value, 
-        created_at, 
-        updated_at, 
-        current_flag
-    )
-    VALUES (
-        source.order_id, 
-        source.payment_sequential, 
-        source.payment_type,
-        source.payment_installments, 
-        source.payment_value, 
-        CURRENT_TIMESTAMP,
-        CURRENT_TIMESTAMP, 
-        'Current'
-    );
+    updated_at = CASE WHEN
+                        stg.order_payments.payment_sequential <> EXCLUDED.payment_sequential
+                        OR stg.order_payments.payment_type <> EXCLUDED.payment_type
+                        OR stg.order_payments.payment_installments <> EXCLUDED.payment_installments
+                        OR stg.order_payments.payment_value <> EXCLUDED.payment_value
+                THEN
+                        CURRENT_TIMESTAMP
+                ELSE
+                        stg.order_payments.updated_at
+                END;

@@ -1,31 +1,29 @@
-MERGE INTO stg.geolocation AS staging
-USING public.geolocation AS source
-ON staging.geolocation_zip_code_prefix = source.geolocation_zip_code_prefix
+INSERT INTO stg.geolocation 
+    (geolocation_zip_code_prefix, geolocation_lat, geolocation_lng, geolocation_city, geolocation_state)
 
-WHEN MATCHED THEN
-    UPDATE SET
-        geolocation_lat = source.geolocation_lat,
-        geolocation_lng = source.geolocation_lng,
-        geolocation_city = source.geolocation_city,
-        geolocation_state = source.geolocation_state,
-        updated_at = CURRENT_TIMESTAMP
+SELECT
+    geolocation_zip_code_prefix,
+    geolocation_lat,
+    geolocation_lng,
+    geolocation_city,
+    geolocation_state
 
-WHEN NOT MATCHED THEN
-    INSERT (
-        geolocation_zip_code_prefix,
-        geolocation_lat, 
-        geolocation_lng, 
-        geolocation_city, 
-        geolocation_state, 
-        created_at, 
-        updated_at
-    )
-    VALUES (
-        source.geolocation_zip_code_prefix,
-        source.geolocation_lat, 
-        source.geolocation_lng,
-        source.geolocation_city, 
-        source.geolocation_state, 
-        CURRENT_TIMESTAMP, 
-        CURRENT_TIMESTAMP
-    );
+FROM public.geolocation
+
+ON CONFLICT(geolocation_zip_code_prefix) 
+DO UPDATE SET
+    geolocation_lat = EXCLUDED.geolocation_lat,
+    geolocation_lng = EXCLUDED.geolocation_lng,
+    geolocation_city = EXCLUDED.geolocation_city,
+    geolocation_state = EXCLUDED.geolocation_state,
+
+    updated_at = CASE WHEN 
+                        stg.geolocation.geolocation_lat <> EXCLUDED.geolocation_lat
+                        OR stg.geolocation.geolocation_lng <> EXCLUDED.geolocation_lng
+                        OR stg.geolocation.geolocation_city <> EXCLUDED.geolocation_city
+                        OR stg.geolocation.geolocation_state <> EXCLUDED.geolocation_state
+                THEN 
+                        CURRENT_TIMESTAMP
+                ELSE
+                        stg.geolocation.updated_at
+                END;

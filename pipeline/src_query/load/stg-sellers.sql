@@ -1,50 +1,26 @@
-MERGE INTO stg.sellers AS staging
-USING (
-    SELECT 
-        s.seller_id,
-        s.seller_zip_code_prefix,
-        g.geolocation_lat,
-        g.geolocation_lng,
-        s.seller_city,
-        s.seller_state,
-        CURRENT_TIMESTAMP AS created_at
-    FROM public.sellers s
-    JOIN public.geolocation g
-        ON s.seller_zip_code_prefix = g.geolocation_zip_code_prefix
-) AS source
+INSERT INTO stg.sellers
+    (seller_id, seller_zip_code_prefix, seller_city, seller_state)
+    
+SELECT
+    seller_id,
+    seller_zip_code_prefix,
+    seller_city,
+    seller_state
 
+FROM public.sellers
 
-ON staging.seller_id = source.seller_id
+ON CONFLICT(seller_id)
+DO UPDATE SET
+    seller_zip_code_prefix = EXCLUDED.seller_zip_code_prefix,
+    seller_city = EXCLUDED.seller_city,
+    seller_state = EXCLUDED.seller_state,
 
-WHEN MATCHED AND (
-    staging.seller_city <> source.seller_city OR 
-    staging.seller_state <> source.seller_state OR 
-    staging.seller_zip_code_prefix <> source.seller_zip_code_prefix
-) THEN
-    UPDATE SET 
-        current_flag = 'Expired',
-        updated_at = CURRENT_TIMESTAMP
-
-WHEN NOT MATCHED THEN
-    INSERT (
-        seller_id, 
-        seller_zip_code_prefix, 
-        latitude, 
-        longitude,
-        seller_city, 
-        seller_state, 
-        created_at, 
-        updated_at, 
-        current_flag
-    )
-    VALUES (
-        source.seller_id, 
-        source.seller_zip_code_prefix, 
-        source.geolocation_lat, 
-        source.geolocation_lng,
-        source.seller_city, 
-        source.seller_state, 
-        CURRENT_TIMESTAMP, 
-        CURRENT_TIMESTAMP, 
-        'Current'
-    );
+    updated_at = CASE WHEN
+                        stg.sellers.seller_zip_code_prefix <> EXCLUDED.seller_zip_code_prefix
+                        OR stg.sellers.seller_city <> EXCLUDED.seller_city
+                        OR stg.sellers.seller_state <> EXCLUDED.seller_state
+                THEN
+                        CURRENT_TIMESTAMP
+                ELSE
+                        stg.sellers.updated_at
+                END;

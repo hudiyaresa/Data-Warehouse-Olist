@@ -1,41 +1,39 @@
-MERGE INTO stg.orders AS staging
-USING (
-    SELECT 
-        o.order_id,
-        o.customer_id,
-        o.order_status,
-        o.order_purchase_timestamp,
-        CURRENT_TIMESTAMP AS created_at
-    FROM public.orders o
-) AS source
+INSERT INTO stg.orders
+    (order_id, customer_id, order_status, order_purchase_timestamp, order_approved_at,
+     order_delivered_carrier_date, order_delivered_customer_date, order_estimated_delivery_date)
 
+SELECT
+    order_id,
+    customer_id,
+    order_status,
+    order_purchase_timestamp,
+    order_approved_at,
+    order_delivered_carrier_date,
+    order_delivered_customer_date,
+    order_estimated_delivery_date
 
-ON staging.order_id = source.order_id
+FROM public.orders
 
-WHEN MATCHED AND (
-    staging.order_status <> source.order_status OR 
-    staging.order_purchase_timestamp <> source.order_purchase_timestamp
-) THEN
-    UPDATE SET 
-        current_flag = 'Expired',
-        updated_at = CURRENT_TIMESTAMP
+ON CONFLICT(order_id)
+DO UPDATE SET
+    customer_id = EXCLUDED.customer_id,
+    order_status = EXCLUDED.order_status,
+    order_purchase_timestamp = EXCLUDED.order_purchase_timestamp,
+    order_approved_at = EXCLUDED.order_approved_at,
+    order_delivered_carrier_date = EXCLUDED.order_delivered_carrier_date,
+    order_delivered_customer_date = EXCLUDED.order_delivered_customer_date,
+    order_estimated_delivery_date = EXCLUDED.order_estimated_delivery_date,
 
-WHEN NOT MATCHED THEN
-    INSERT (
-        order_id, 
-        customer_id, 
-        order_status, 
-        order_purchase_timestamp,
-        created_at, 
-        updated_at, 
-        current_flag
-    )
-    VALUES (
-        source.order_id, 
-        source.customer_id, 
-        source.order_status, 
-        source.order_purchase_timestamp,
-        CURRENT_TIMESTAMP, 
-        CURRENT_TIMESTAMP, 
-        'Current'
-    );
+    updated_at = CASE WHEN
+                        stg.orders.customer_id <> EXCLUDED.customer_id
+                        OR stg.orders.order_status <> EXCLUDED.order_status
+                        OR stg.orders.order_purchase_timestamp <> EXCLUDED.order_purchase_timestamp
+                        OR stg.orders.order_approved_at <> EXCLUDED.order_approved_at
+                        OR stg.orders.order_delivered_carrier_date <> EXCLUDED.order_delivered_carrier_date
+                        OR stg.orders.order_delivered_customer_date <> EXCLUDED.order_delivered_customer_date
+                        OR stg.orders.order_estimated_delivery_date <> EXCLUDED.order_estimated_delivery_date
+                THEN
+                        CURRENT_TIMESTAMP
+                ELSE
+                        stg.orders.updated_at
+                END;
