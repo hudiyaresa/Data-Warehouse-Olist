@@ -88,12 +88,12 @@ class Load(luigi.Task):
             geolocation_data = pd.read_csv(self.input()[0].path)
             customers_data = pd.read_csv(self.input()[1].path)
             sellers_data = pd.read_csv(self.input()[2].path)
-            order_items_data = pd.read_csv(self.input()[2].path)
-            order_payments_data = pd.read_csv(self.input()[3].path)
-            order_reviews_data = pd.read_csv(self.input()[4].path)
-            orders_data = pd.read_csv(self.input()[5].path)
-            product_category_name_data = pd.read_csv(self.input()[6].path)
-            products_data = pd.read_csv(self.input()[7].path)
+            order_items_data = pd.read_csv(self.input()[3].path)
+            order_payments_data = pd.read_csv(self.input()[4].path)
+            order_reviews_data = pd.read_csv(self.input()[5].path)
+            orders_data = pd.read_csv(self.input()[6].path)
+            product_category_name_data = pd.read_csv(self.input()[7].path)
+            products_data = pd.read_csv(self.input()[8].path)
             
             logging.info(f"Read Extracted Data - SUCCESS")
             

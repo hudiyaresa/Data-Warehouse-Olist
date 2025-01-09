@@ -18,15 +18,15 @@ DIR_LOG = os.getenv("DIR_LOG")
 class Extract(luigi.Task):
     
     # Define tables to be extracted from db sources
-    tables_to_extract = ['public.customers',
-                         'public.geolocation', 
+    tables_to_extract = ['public.geolocation',
+                         'public.customers',
+                         'public.sellers',
                          'public.order_items', 
                          'public.order_payments', 
                          'public.order_reviews', 
                          'public.orders',
                          'public.product_category_name_translation',
-                         'public.products',
-                         'public.sellers']
+                         'public.products',]
     
     def requires(self):
         pass
