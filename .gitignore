@@ -1,5 +1,7 @@
 venv/
 .venv/
+.venv2/
+.venvu/
 creds/
 .env
 **/__pycache__/

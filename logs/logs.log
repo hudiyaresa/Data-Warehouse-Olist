@@ -2470,3 +2470,1127 @@ This progress looks :( because there were failed tasks
 
 ===== Luigi Execution Summary =====
 
+2025-01-10 02:51:06,727 - INFO - ==================================STARTING EXTRACT DATA=======================================
+2025-01-10 02:51:06,861 - INFO - EXTRACT 'public.geolocation' - SUCCESS.
+2025-01-10 02:51:07,358 - INFO - EXTRACT 'public.customers' - SUCCESS.
+2025-01-10 02:51:07,386 - INFO - EXTRACT 'public.sellers' - SUCCESS.
+2025-01-10 02:51:08,287 - INFO - EXTRACT 'public.order_items' - SUCCESS.
+2025-01-10 02:51:08,752 - INFO - EXTRACT 'public.order_payments' - SUCCESS.
+2025-01-10 02:51:09,419 - INFO - EXTRACT 'public.order_reviews' - SUCCESS.
+2025-01-10 02:51:10,222 - INFO - EXTRACT 'public.orders' - SUCCESS.
+2025-01-10 02:51:10,248 - INFO - EXTRACT 'public.product_category_name_translation' - SUCCESS.
+2025-01-10 02:51:10,508 - INFO - EXTRACT 'public.products' - SUCCESS.
+2025-01-10 02:51:10,509 - INFO - Extract All Tables From Sources - SUCCESS
+2025-01-10 02:51:10,514 - INFO - ==================================ENDING EXTRACT DATA=======================================
+2025-01-10 02:51:10,515 - INFO - [pid 1325] Worker Worker(salt=6183284721, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=1325) done      Extract()
+2025-01-10 02:51:10,516 - DEBUG - 1 running tasks, waiting for next task to finish
+2025-01-10 02:51:10,519 - INFO - Informed scheduler that task   Extract__99914b932b   has status   DONE
+2025-01-10 02:51:10,520 - DEBUG - Asking scheduler for work...
+2025-01-10 02:51:10,523 - DEBUG - Pending tasks: 2
+2025-01-10 02:51:10,523 - INFO - [pid 1325] Worker Worker(salt=6183284721, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=1325) running   Load()
+2025-01-10 02:51:10,543 - ERROR - truncate query TRUNCATE TABLE public.customers CASCADE;
+TRUNCATE TABLE public.geolocation CASCADE ;
+TRUNCATE TABLE public.order_items CASCADE;
+TRUNCATE TABLE public.order_payments CASCADE;
+TRUNCATE TABLE public.order_reviews CASCADE;
+TRUNCATE TABLE public.orders CASCADE;
+TRUNCATE TABLE public.product_category_name_translation CASCADE;
+TRUNCATE TABLE public.products CASCADE;
+TRUNCATE TABLE public.sellers CASCADE;
+2025-01-10 02:51:11,777 - INFO - Read Extracted Data - SUCCESS
+2025-01-10 02:51:11,779 - INFO - Connect to DWH - SUCCESS
+2025-01-10 02:51:11,811 - ERROR - Truncate sources Schema in DWH - FAILED
+2025-01-10 02:51:11,813 - ERROR - [pid 1325] Worker Worker(salt=6183284721, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=1325) failed    Load()
+Traceback (most recent call last):
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1970, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedTable: relation "public.customers" does not exist
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/load.py", line 133, in run
+    session.execute(query)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2306, in execute
+    return self._execute_internal(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2200, in _execute_internal
+    result = conn.execute(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1421, in execute
+    return meth(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/sql/elements.py", line 514, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1643, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1849, in _execute_context
+    return self._exec_single_context(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1989, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2356, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1970, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedTable) relation "public.customers" does not exist
+
+[SQL: TRUNCATE TABLE public.customers CASCADE]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/user/.local/lib/python3.10/site-packages/luigi/worker.py", line 210, in run
+    new_deps = self._run_get_new_deps()
+  File "/home/user/.local/lib/python3.10/site-packages/luigi/worker.py", line 138, in _run_get_new_deps
+    task_gen = self.task.run()
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/load.py", line 144, in run
+    raise Exception("Failed to Truncate sources Schema in DWH")
+Exception: Failed to Truncate sources Schema in DWH
+2025-01-10 02:51:11,836 - DEBUG - 1 running tasks, waiting for next task to finish
+2025-01-10 02:51:11,841 - INFO - Informed scheduler that task   Load__99914b932b   has status   FAILED
+2025-01-10 02:51:11,842 - DEBUG - Asking scheduler for work...
+2025-01-10 02:51:11,844 - DEBUG - Done
+2025-01-10 02:51:11,844 - DEBUG - There are no more tasks to run at this time
+2025-01-10 02:51:11,845 - DEBUG - There are 2 pending tasks possibly being run by other workers
+2025-01-10 02:51:11,846 - DEBUG - There are 2 pending tasks unique to this worker
+2025-01-10 02:51:11,846 - DEBUG - There are 2 pending tasks last scheduled by this worker
+2025-01-10 02:51:11,847 - INFO - Worker Worker(salt=6183284721, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=1325) was stopped. Shutting down Keep-Alive thread
+2025-01-10 02:51:11,848 - INFO - 
+===== Luigi Execution Summary =====
+
+Scheduled 3 tasks of which:
+* 1 ran successfully:
+    - 1 Extract()
+* 1 failed:
+    - 1 Load()
+* 1 were left pending, among these:
+    * 1 had failed dependencies:
+        - 1 Transform()
+
+This progress looks :( because there were failed tasks
+
+===== Luigi Execution Summary =====
+
+2025-01-10 02:52:45,035 - INFO - ==================================STARTING EXTRACT DATA=======================================
+2025-01-10 02:52:45,158 - INFO - EXTRACT 'public.geolocation' - SUCCESS.
+2025-01-10 02:52:45,682 - INFO - EXTRACT 'public.customers' - SUCCESS.
+2025-01-10 02:52:45,708 - INFO - EXTRACT 'public.sellers' - SUCCESS.
+2025-01-10 02:52:46,581 - INFO - EXTRACT 'public.order_items' - SUCCESS.
+2025-01-10 02:52:46,994 - INFO - EXTRACT 'public.order_payments' - SUCCESS.
+2025-01-10 02:52:47,722 - INFO - EXTRACT 'public.order_reviews' - SUCCESS.
+2025-01-10 02:52:48,631 - INFO - EXTRACT 'public.orders' - SUCCESS.
+2025-01-10 02:52:48,660 - INFO - EXTRACT 'public.product_category_name_translation' - SUCCESS.
+2025-01-10 02:52:48,923 - INFO - EXTRACT 'public.products' - SUCCESS.
+2025-01-10 02:52:48,924 - INFO - Extract All Tables From Sources - SUCCESS
+2025-01-10 02:52:48,930 - INFO - ==================================ENDING EXTRACT DATA=======================================
+2025-01-10 02:52:48,931 - INFO - [pid 1346] Worker Worker(salt=3119685047, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=1346) done      Extract()
+2025-01-10 02:52:48,933 - DEBUG - 1 running tasks, waiting for next task to finish
+2025-01-10 02:52:48,936 - INFO - Informed scheduler that task   Extract__99914b932b   has status   DONE
+2025-01-10 02:52:48,937 - DEBUG - Asking scheduler for work...
+2025-01-10 02:52:48,940 - DEBUG - Pending tasks: 2
+2025-01-10 02:52:48,940 - INFO - [pid 1346] Worker Worker(salt=3119685047, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=1346) running   Load()
+2025-01-10 02:52:48,966 - ERROR - truncate query TRUNCATE TABLE public.customers CASCADE;
+TRUNCATE TABLE public.geolocation CASCADE;
+TRUNCATE TABLE public.order_items CASCADE;
+TRUNCATE TABLE public.order_payments CASCADE;
+TRUNCATE TABLE public.order_reviews CASCADE;
+TRUNCATE TABLE public.orders CASCADE;
+TRUNCATE TABLE public.product_category_name_translation CASCADE;
+TRUNCATE TABLE public.products CASCADE;
+TRUNCATE TABLE public.sellers CASCADE;
+2025-01-10 02:52:50,126 - INFO - Read Extracted Data - SUCCESS
+2025-01-10 02:52:50,128 - INFO - Connect to DWH - SUCCESS
+2025-01-10 02:52:50,143 - ERROR - Truncate sources Schema in DWH - FAILED
+2025-01-10 02:52:50,145 - ERROR - [pid 1346] Worker Worker(salt=3119685047, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=1346) failed    Load()
+Traceback (most recent call last):
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1970, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedTable: relation "public.customers" does not exist
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/load.py", line 133, in run
+    session.execute(query)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2306, in execute
+    return self._execute_internal(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2200, in _execute_internal
+    result = conn.execute(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1421, in execute
+    return meth(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/sql/elements.py", line 514, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1643, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1849, in _execute_context
+    return self._exec_single_context(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1989, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2356, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1970, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedTable) relation "public.customers" does not exist
+
+[SQL: TRUNCATE TABLE public.customers CASCADE]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/user/.local/lib/python3.10/site-packages/luigi/worker.py", line 210, in run
+    new_deps = self._run_get_new_deps()
+  File "/home/user/.local/lib/python3.10/site-packages/luigi/worker.py", line 138, in _run_get_new_deps
+    task_gen = self.task.run()
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/load.py", line 144, in run
+    raise Exception("Failed to Truncate sources Schema in DWH")
+Exception: Failed to Truncate sources Schema in DWH
+2025-01-10 02:52:50,169 - DEBUG - 1 running tasks, waiting for next task to finish
+2025-01-10 02:52:50,174 - INFO - Informed scheduler that task   Load__99914b932b   has status   FAILED
+2025-01-10 02:52:50,174 - DEBUG - Asking scheduler for work...
+2025-01-10 02:52:50,176 - DEBUG - Done
+2025-01-10 02:52:50,177 - DEBUG - There are no more tasks to run at this time
+2025-01-10 02:52:50,177 - DEBUG - There are 2 pending tasks possibly being run by other workers
+2025-01-10 02:52:50,178 - DEBUG - There are 2 pending tasks unique to this worker
+2025-01-10 02:52:50,178 - DEBUG - There are 2 pending tasks last scheduled by this worker
+2025-01-10 02:52:50,179 - INFO - Worker Worker(salt=3119685047, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=1346) was stopped. Shutting down Keep-Alive thread
+2025-01-10 02:52:50,180 - INFO - 
+===== Luigi Execution Summary =====
+
+Scheduled 3 tasks of which:
+* 1 ran successfully:
+    - 1 Extract()
+* 1 failed:
+    - 1 Load()
+* 1 were left pending, among these:
+    * 1 had failed dependencies:
+        - 1 Transform()
+
+This progress looks :( because there were failed tasks
+
+===== Luigi Execution Summary =====
+
+2025-01-10 02:54:48,527 - INFO - ==================================STARTING EXTRACT DATA=======================================
+2025-01-10 02:54:48,656 - INFO - EXTRACT 'public.geolocation' - SUCCESS.
+2025-01-10 02:54:49,243 - INFO - EXTRACT 'public.customers' - SUCCESS.
+2025-01-10 02:54:49,273 - INFO - EXTRACT 'public.sellers' - SUCCESS.
+2025-01-10 02:54:50,259 - INFO - EXTRACT 'public.order_items' - SUCCESS.
+2025-01-10 02:54:50,691 - INFO - EXTRACT 'public.order_payments' - SUCCESS.
+2025-01-10 02:54:51,338 - INFO - EXTRACT 'public.order_reviews' - SUCCESS.
+2025-01-10 02:54:52,221 - INFO - EXTRACT 'public.orders' - SUCCESS.
+2025-01-10 02:54:52,252 - INFO - EXTRACT 'public.product_category_name_translation' - SUCCESS.
+2025-01-10 02:54:52,495 - INFO - EXTRACT 'public.products' - SUCCESS.
+2025-01-10 02:54:52,496 - INFO - Extract All Tables From Sources - SUCCESS
+2025-01-10 02:54:52,502 - INFO - ==================================ENDING EXTRACT DATA=======================================
+2025-01-10 02:54:52,503 - INFO - [pid 1367] Worker Worker(salt=2103284914, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=1367) done      Extract()
+2025-01-10 02:54:52,504 - DEBUG - 1 running tasks, waiting for next task to finish
+2025-01-10 02:54:52,508 - INFO - Informed scheduler that task   Extract__99914b932b   has status   DONE
+2025-01-10 02:54:52,508 - DEBUG - Asking scheduler for work...
+2025-01-10 02:54:52,511 - DEBUG - Pending tasks: 2
+2025-01-10 02:54:52,511 - INFO - [pid 1367] Worker Worker(salt=2103284914, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=1367) running   Load()
+2025-01-10 02:54:52,526 - ERROR - truncate query TRUNCATE TABLE public.customers CASCADE;
+TRUNCATE TABLE public.geolocation CASCADE;
+TRUNCATE TABLE public.order_items CASCADE;
+TRUNCATE TABLE public.order_payments CASCADE;
+TRUNCATE TABLE public.order_reviews CASCADE;
+TRUNCATE TABLE public.orders CASCADE;
+TRUNCATE TABLE public.product_category_name_translation CASCADE;
+TRUNCATE TABLE public.products CASCADE;
+TRUNCATE TABLE public.sellers CASCADE;
+2025-01-10 02:54:53,706 - INFO - Read Extracted Data - SUCCESS
+2025-01-10 02:54:53,707 - INFO - Connect to DWH - SUCCESS
+2025-01-10 02:54:53,719 - ERROR - Truncate sources Schema in DWH - FAILED
+2025-01-10 02:54:53,721 - ERROR - [pid 1367] Worker Worker(salt=2103284914, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=1367) failed    Load()
+Traceback (most recent call last):
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1970, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedTable: relation "public.customers" does not exist
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/load.py", line 133, in run
+    session.execute(query)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2306, in execute
+    return self._execute_internal(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2200, in _execute_internal
+    result = conn.execute(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1421, in execute
+    return meth(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/sql/elements.py", line 514, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1643, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1849, in _execute_context
+    return self._exec_single_context(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1989, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2356, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1970, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedTable) relation "public.customers" does not exist
+
+[SQL: TRUNCATE TABLE public.customers CASCADE]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/user/.local/lib/python3.10/site-packages/luigi/worker.py", line 210, in run
+    new_deps = self._run_get_new_deps()
+  File "/home/user/.local/lib/python3.10/site-packages/luigi/worker.py", line 138, in _run_get_new_deps
+    task_gen = self.task.run()
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/load.py", line 145, in run
+    raise Exception("Failed to Truncate sources Schema in DWH")
+Exception: Failed to Truncate sources Schema in DWH
+2025-01-10 02:54:53,744 - DEBUG - 1 running tasks, waiting for next task to finish
+2025-01-10 02:54:53,749 - INFO - Informed scheduler that task   Load__99914b932b   has status   FAILED
+2025-01-10 02:54:53,750 - DEBUG - Asking scheduler for work...
+2025-01-10 02:54:53,753 - DEBUG - Done
+2025-01-10 02:54:53,754 - DEBUG - There are no more tasks to run at this time
+2025-01-10 02:54:53,754 - DEBUG - There are 2 pending tasks possibly being run by other workers
+2025-01-10 02:54:53,755 - DEBUG - There are 2 pending tasks unique to this worker
+2025-01-10 02:54:53,755 - DEBUG - There are 2 pending tasks last scheduled by this worker
+2025-01-10 02:54:53,755 - INFO - Worker Worker(salt=2103284914, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=1367) was stopped. Shutting down Keep-Alive thread
+2025-01-10 02:54:53,756 - INFO - 
+===== Luigi Execution Summary =====
+
+Scheduled 3 tasks of which:
+* 1 ran successfully:
+    - 1 Extract()
+* 1 failed:
+    - 1 Load()
+* 1 were left pending, among these:
+    * 1 had failed dependencies:
+        - 1 Transform()
+
+This progress looks :( because there were failed tasks
+
+===== Luigi Execution Summary =====
+
+2025-01-10 03:01:09,138 - INFO - ==================================STARTING EXTRACT DATA=======================================
+2025-01-10 03:01:09,239 - INFO - EXTRACT 'public.geolocation' - SUCCESS.
+2025-01-10 03:01:09,763 - INFO - EXTRACT 'public.customers' - SUCCESS.
+2025-01-10 03:01:09,793 - INFO - EXTRACT 'public.sellers' - SUCCESS.
+2025-01-10 03:01:10,659 - INFO - EXTRACT 'public.order_items' - SUCCESS.
+2025-01-10 03:01:11,223 - INFO - EXTRACT 'public.order_payments' - SUCCESS.
+2025-01-10 03:01:11,939 - INFO - EXTRACT 'public.order_reviews' - SUCCESS.
+2025-01-10 03:01:12,944 - INFO - EXTRACT 'public.orders' - SUCCESS.
+2025-01-10 03:01:12,974 - INFO - EXTRACT 'public.product_category_name_translation' - SUCCESS.
+2025-01-10 03:01:13,240 - INFO - EXTRACT 'public.products' - SUCCESS.
+2025-01-10 03:01:13,242 - INFO - Extract All Tables From Sources - SUCCESS
+2025-01-10 03:01:13,248 - INFO - ==================================ENDING EXTRACT DATA=======================================
+2025-01-10 03:01:13,250 - INFO - [pid 1400] Worker Worker(salt=7550346014, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=1400) done      Extract()
+2025-01-10 03:01:13,251 - DEBUG - 1 running tasks, waiting for next task to finish
+2025-01-10 03:01:13,256 - INFO - Informed scheduler that task   Extract__99914b932b   has status   DONE
+2025-01-10 03:01:13,257 - DEBUG - Asking scheduler for work...
+2025-01-10 03:01:13,259 - DEBUG - Pending tasks: 2
+2025-01-10 03:01:13,260 - INFO - [pid 1400] Worker Worker(salt=7550346014, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=1400) running   Load()
+2025-01-10 03:01:13,278 - ERROR - truncate query TRUNCATE TABLE public.customers CASCADE;
+TRUNCATE TABLE public.geolocation CASCADE;
+TRUNCATE TABLE public.order_items CASCADE;
+TRUNCATE TABLE public.order_payments CASCADE;
+TRUNCATE TABLE public.order_reviews CASCADE;
+TRUNCATE TABLE public.orders CASCADE;
+TRUNCATE TABLE public.product_category_name_translation CASCADE;
+TRUNCATE TABLE public.products CASCADE;
+TRUNCATE TABLE public.sellers CASCADE;
+2025-01-10 03:01:14,463 - INFO - Read Extracted Data - SUCCESS
+2025-01-10 03:01:14,465 - INFO - Connect to DWH - SUCCESS
+2025-01-10 03:01:14,477 - ERROR - Truncate sources Schema in DWH - FAILED
+2025-01-10 03:01:14,479 - ERROR - [pid 1400] Worker Worker(salt=7550346014, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=1400) failed    Load()
+Traceback (most recent call last):
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1970, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedTable: relation "public.customers" does not exist
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/load.py", line 133, in run
+    session.execute(query)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2306, in execute
+    return self._execute_internal(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2200, in _execute_internal
+    result = conn.execute(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1421, in execute
+    return meth(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/sql/elements.py", line 514, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1643, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1849, in _execute_context
+    return self._exec_single_context(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1989, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2356, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1970, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedTable) relation "public.customers" does not exist
+
+[SQL: TRUNCATE TABLE public.customers CASCADE]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/user/.local/lib/python3.10/site-packages/luigi/worker.py", line 210, in run
+    new_deps = self._run_get_new_deps()
+  File "/home/user/.local/lib/python3.10/site-packages/luigi/worker.py", line 138, in _run_get_new_deps
+    task_gen = self.task.run()
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/load.py", line 144, in run
+    raise Exception("Failed to Truncate sources Schema in DWH")
+Exception: Failed to Truncate sources Schema in DWH
+2025-01-10 03:01:14,504 - DEBUG - 1 running tasks, waiting for next task to finish
+2025-01-10 03:01:14,509 - INFO - Informed scheduler that task   Load__99914b932b   has status   FAILED
+2025-01-10 03:01:14,510 - DEBUG - Asking scheduler for work...
+2025-01-10 03:01:14,512 - DEBUG - Done
+2025-01-10 03:01:14,512 - DEBUG - There are no more tasks to run at this time
+2025-01-10 03:01:14,513 - DEBUG - There are 2 pending tasks possibly being run by other workers
+2025-01-10 03:01:14,513 - DEBUG - There are 2 pending tasks unique to this worker
+2025-01-10 03:01:14,513 - DEBUG - There are 2 pending tasks last scheduled by this worker
+2025-01-10 03:01:14,514 - INFO - Worker Worker(salt=7550346014, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=1400) was stopped. Shutting down Keep-Alive thread
+2025-01-10 03:01:14,515 - INFO - 
+===== Luigi Execution Summary =====
+
+Scheduled 3 tasks of which:
+* 1 ran successfully:
+    - 1 Extract()
+* 1 failed:
+    - 1 Load()
+* 1 were left pending, among these:
+    * 1 had failed dependencies:
+        - 1 Transform()
+
+This progress looks :( because there were failed tasks
+
+===== Luigi Execution Summary =====
+
+2025-01-10 03:02:34,897 - INFO - ==================================STARTING EXTRACT DATA=======================================
+2025-01-10 03:02:35,010 - INFO - EXTRACT 'public.geolocation' - SUCCESS.
+2025-01-10 03:02:35,573 - INFO - EXTRACT 'public.customers' - SUCCESS.
+2025-01-10 03:02:35,600 - INFO - EXTRACT 'public.sellers' - SUCCESS.
+2025-01-10 03:02:36,545 - INFO - EXTRACT 'public.order_items' - SUCCESS.
+2025-01-10 03:02:36,995 - INFO - EXTRACT 'public.order_payments' - SUCCESS.
+2025-01-10 03:02:37,685 - INFO - EXTRACT 'public.order_reviews' - SUCCESS.
+2025-01-10 03:02:38,591 - INFO - EXTRACT 'public.orders' - SUCCESS.
+2025-01-10 03:02:38,625 - INFO - EXTRACT 'public.product_category_name_translation' - SUCCESS.
+2025-01-10 03:02:38,888 - INFO - EXTRACT 'public.products' - SUCCESS.
+2025-01-10 03:02:38,889 - INFO - Extract All Tables From Sources - SUCCESS
+2025-01-10 03:02:38,895 - INFO - ==================================ENDING EXTRACT DATA=======================================
+2025-01-10 03:02:38,896 - INFO - [pid 1421] Worker Worker(salt=4499232462, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=1421) done      Extract()
+2025-01-10 03:02:38,898 - DEBUG - 1 running tasks, waiting for next task to finish
+2025-01-10 03:02:38,902 - INFO - Informed scheduler that task   Extract__99914b932b   has status   DONE
+2025-01-10 03:02:38,902 - DEBUG - Asking scheduler for work...
+2025-01-10 03:02:38,905 - DEBUG - Pending tasks: 2
+2025-01-10 03:02:38,906 - INFO - [pid 1421] Worker Worker(salt=4499232462, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=1421) running   Load()
+2025-01-10 03:02:38,921 - ERROR - truncate query TRUNCATE TABLE public.customers CASCADE;
+TRUNCATE TABLE public.geolocation CASCADE;
+TRUNCATE TABLE public.order_items CASCADE;
+TRUNCATE TABLE public.order_payments CASCADE;
+TRUNCATE TABLE public.order_reviews CASCADE;
+TRUNCATE TABLE public.orders CASCADE;
+TRUNCATE TABLE public.product_category_name_translation CASCADE;
+TRUNCATE TABLE public.products CASCADE;
+TRUNCATE TABLE public.sellers CASCADE;
+2025-01-10 03:02:40,017 - INFO - Read Extracted Data - SUCCESS
+2025-01-10 03:02:40,018 - INFO - Connect to DWH - SUCCESS
+2025-01-10 03:02:40,030 - ERROR - Truncate sources Schema in DWH - FAILED
+2025-01-10 03:02:40,032 - ERROR - [pid 1421] Worker Worker(salt=4499232462, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=1421) failed    Load()
+Traceback (most recent call last):
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1970, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedTable: relation "public.customers" does not exist
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/load.py", line 133, in run
+    session.execute(query)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2306, in execute
+    return self._execute_internal(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2200, in _execute_internal
+    result = conn.execute(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1421, in execute
+    return meth(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/sql/elements.py", line 514, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1643, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1849, in _execute_context
+    return self._exec_single_context(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1989, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2356, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1970, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedTable) relation "public.customers" does not exist
+
+[SQL: TRUNCATE TABLE public.customers CASCADE]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/user/.local/lib/python3.10/site-packages/luigi/worker.py", line 210, in run
+    new_deps = self._run_get_new_deps()
+  File "/home/user/.local/lib/python3.10/site-packages/luigi/worker.py", line 138, in _run_get_new_deps
+    task_gen = self.task.run()
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/load.py", line 144, in run
+    raise Exception("Failed to Truncate sources Schema in DWH")
+Exception: Failed to Truncate sources Schema in DWH
+2025-01-10 03:02:40,053 - DEBUG - 1 running tasks, waiting for next task to finish
+2025-01-10 03:02:40,057 - INFO - Informed scheduler that task   Load__99914b932b   has status   FAILED
+2025-01-10 03:02:40,057 - DEBUG - Asking scheduler for work...
+2025-01-10 03:02:40,059 - DEBUG - Done
+2025-01-10 03:02:40,060 - DEBUG - There are no more tasks to run at this time
+2025-01-10 03:02:40,060 - DEBUG - There are 2 pending tasks possibly being run by other workers
+2025-01-10 03:02:40,060 - DEBUG - There are 2 pending tasks unique to this worker
+2025-01-10 03:02:40,061 - DEBUG - There are 2 pending tasks last scheduled by this worker
+2025-01-10 03:02:40,061 - INFO - Worker Worker(salt=4499232462, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=1421) was stopped. Shutting down Keep-Alive thread
+2025-01-10 03:02:40,063 - INFO - 
+===== Luigi Execution Summary =====
+
+Scheduled 3 tasks of which:
+* 1 ran successfully:
+    - 1 Extract()
+* 1 failed:
+    - 1 Load()
+* 1 were left pending, among these:
+    * 1 had failed dependencies:
+        - 1 Transform()
+
+This progress looks :( because there were failed tasks
+
+===== Luigi Execution Summary =====
+
+2025-01-10 03:09:35,020 - INFO - ==================================STARTING EXTRACT DATA=======================================
+2025-01-10 03:09:35,132 - INFO - EXTRACT 'public.geolocation' - SUCCESS.
+2025-01-10 03:09:35,674 - INFO - EXTRACT 'public.customers' - SUCCESS.
+2025-01-10 03:09:35,710 - INFO - EXTRACT 'public.sellers' - SUCCESS.
+2025-01-10 03:09:36,651 - INFO - EXTRACT 'public.order_items' - SUCCESS.
+2025-01-10 03:09:37,098 - INFO - EXTRACT 'public.order_payments' - SUCCESS.
+2025-01-10 03:09:37,827 - INFO - EXTRACT 'public.order_reviews' - SUCCESS.
+2025-01-10 03:09:38,833 - INFO - EXTRACT 'public.orders' - SUCCESS.
+2025-01-10 03:09:38,865 - INFO - EXTRACT 'public.product_category_name_translation' - SUCCESS.
+2025-01-10 03:09:39,111 - INFO - EXTRACT 'public.products' - SUCCESS.
+2025-01-10 03:09:39,113 - INFO - Extract All Tables From Sources - SUCCESS
+2025-01-10 03:09:39,120 - INFO - ==================================ENDING EXTRACT DATA=======================================
+2025-01-10 03:09:39,121 - INFO - [pid 1451] Worker Worker(salt=222051670, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=1451) done      Extract()
+2025-01-10 03:09:39,123 - DEBUG - 1 running tasks, waiting for next task to finish
+2025-01-10 03:09:39,126 - INFO - Informed scheduler that task   Extract__99914b932b   has status   DONE
+2025-01-10 03:09:39,126 - DEBUG - Asking scheduler for work...
+2025-01-10 03:09:39,130 - DEBUG - Pending tasks: 2
+2025-01-10 03:09:39,131 - INFO - [pid 1451] Worker Worker(salt=222051670, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=1451) running   Load()
+2025-01-10 03:09:39,152 - ERROR - truncate query TRUNCATE TABLE public.customers CASCADE;
+TRUNCATE TABLE public.geolocation CASCADE;
+TRUNCATE TABLE public.order_items CASCADE;
+TRUNCATE TABLE public.order_payments CASCADE;
+TRUNCATE TABLE public.order_reviews CASCADE;
+TRUNCATE TABLE public.orders CASCADE;
+TRUNCATE TABLE public.product_category_name_translation CASCADE;
+TRUNCATE TABLE public.products CASCADE;
+TRUNCATE TABLE public.sellers CASCADE;
+2025-01-10 03:09:40,357 - INFO - Read Extracted Data - SUCCESS
+2025-01-10 03:09:40,358 - INFO - Connect to DWH - SUCCESS
+2025-01-10 03:09:40,371 - ERROR - Truncate sources Schema in DWH - FAILED
+2025-01-10 03:09:40,373 - ERROR - [pid 1451] Worker Worker(salt=222051670, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=1451) failed    Load()
+Traceback (most recent call last):
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1970, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedTable: relation "public.customers" does not exist
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/load.py", line 133, in run
+    session.execute(query)
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2306, in execute
+    return self._execute_internal(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2200, in _execute_internal
+    result = conn.execute(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1421, in execute
+    return meth(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/sql/elements.py", line 514, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1643, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1849, in _execute_context
+    return self._exec_single_context(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1989, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2356, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1970, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/user/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedTable) relation "public.customers" does not exist
+
+[SQL: TRUNCATE TABLE public.customers CASCADE]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/user/.local/lib/python3.10/site-packages/luigi/worker.py", line 210, in run
+    new_deps = self._run_get_new_deps()
+  File "/home/user/.local/lib/python3.10/site-packages/luigi/worker.py", line 138, in _run_get_new_deps
+    task_gen = self.task.run()
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/load.py", line 144, in run
+    raise Exception("Failed to Truncate sources Schema in DWH")
+Exception: Failed to Truncate sources Schema in DWH
+2025-01-10 03:09:40,398 - DEBUG - 1 running tasks, waiting for next task to finish
+2025-01-10 03:09:40,402 - INFO - Informed scheduler that task   Load__99914b932b   has status   FAILED
+2025-01-10 03:09:40,402 - DEBUG - Asking scheduler for work...
+2025-01-10 03:09:40,405 - DEBUG - Done
+2025-01-10 03:09:40,405 - DEBUG - There are no more tasks to run at this time
+2025-01-10 03:09:40,406 - DEBUG - There are 2 pending tasks possibly being run by other workers
+2025-01-10 03:09:40,406 - DEBUG - There are 2 pending tasks unique to this worker
+2025-01-10 03:09:40,406 - DEBUG - There are 2 pending tasks last scheduled by this worker
+2025-01-10 03:09:40,407 - INFO - Worker Worker(salt=222051670, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=1451) was stopped. Shutting down Keep-Alive thread
+2025-01-10 03:09:40,409 - INFO - 
+===== Luigi Execution Summary =====
+
+Scheduled 3 tasks of which:
+* 1 ran successfully:
+    - 1 Extract()
+* 1 failed:
+    - 1 Load()
+* 1 were left pending, among these:
+    * 1 had failed dependencies:
+        - 1 Transform()
+
+This progress looks :( because there were failed tasks
+
+===== Luigi Execution Summary =====
+
+2025-01-10 11:17:13,116 - INFO - ==================================STARTING EXTRACT DATA=======================================
+2025-01-10 11:17:13,471 - INFO - EXTRACT 'public.geolocation' - SUCCESS.
+2025-01-10 11:17:14,395 - INFO - EXTRACT 'public.customers' - SUCCESS.
+2025-01-10 11:17:14,438 - INFO - EXTRACT 'public.sellers' - SUCCESS.
+2025-01-10 11:17:16,033 - INFO - EXTRACT 'public.order_items' - SUCCESS.
+2025-01-10 11:17:16,881 - INFO - EXTRACT 'public.order_payments' - SUCCESS.
+2025-01-10 11:17:18,245 - INFO - EXTRACT 'public.order_reviews' - SUCCESS.
+2025-01-10 11:17:19,623 - INFO - EXTRACT 'public.orders' - SUCCESS.
+2025-01-10 11:17:19,653 - INFO - EXTRACT 'public.product_category_name_translation' - SUCCESS.
+2025-01-10 11:17:20,056 - INFO - EXTRACT 'public.products' - SUCCESS.
+2025-01-10 11:17:20,057 - INFO - Extract All Tables From Sources - SUCCESS
+2025-01-10 11:17:20,089 - INFO - ==================================ENDING EXTRACT DATA=======================================
+2025-01-10 11:17:20,091 - INFO - [pid 1720] Worker Worker(salt=8882184260, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=1720) done      Extract()
+2025-01-10 11:17:20,092 - DEBUG - 1 running tasks, waiting for next task to finish
+2025-01-10 11:17:20,096 - INFO - Informed scheduler that task   Extract__99914b932b   has status   DONE
+2025-01-10 11:17:20,098 - DEBUG - Asking scheduler for work...
+2025-01-10 11:17:20,101 - DEBUG - Pending tasks: 2
+2025-01-10 11:17:20,102 - INFO - [pid 1720] Worker Worker(salt=8882184260, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=1720) running   Load()
+2025-01-10 11:17:20,153 - ERROR - truncate query TRUNCATE TABLE public.customers CASCADE;
+TRUNCATE TABLE public.geolocation CASCADE;
+TRUNCATE TABLE public.order_items CASCADE;
+TRUNCATE TABLE public.order_payments CASCADE;
+TRUNCATE TABLE public.order_reviews CASCADE;
+TRUNCATE TABLE public.orders CASCADE;
+TRUNCATE TABLE public.product_category_name_translation CASCADE;
+TRUNCATE TABLE public.products CASCADE;
+TRUNCATE TABLE public.sellers CASCADE;
+2025-01-10 11:17:22,340 - INFO - Read Extracted Data - SUCCESS
+2025-01-10 11:17:22,342 - INFO - Connect to DWH - SUCCESS
+2025-01-10 11:17:22,407 - INFO - Truncate sources Schema in DWH - SUCCESS
+2025-01-10 11:17:22,408 - INFO - ==================================STARTING LOAD DATA=======================================
+2025-01-10 11:17:22,807 - INFO - LOAD 'public.geolocation' - SUCCESS
+2025-01-10 11:17:22,823 - INFO - LOAD 'public.product_category_name_translation' - SUCCESS
+2025-01-10 11:17:24,955 - INFO - LOAD 'public.customers' - SUCCESS
+2025-01-10 11:17:25,006 - INFO - LOAD 'public.sellers' - SUCCESS
+2025-01-10 11:17:26,200 - INFO - LOAD 'public.products' - SUCCESS
+2025-01-10 11:17:28,901 - INFO - LOAD 'public.orders' - SUCCESS
+2025-01-10 11:17:31,953 - INFO - LOAD 'public.order_items' - SUCCESS
+2025-01-10 11:17:34,020 - INFO - LOAD 'public.order_payments' - SUCCESS
+2025-01-10 11:17:38,067 - INFO - LOAD 'public.order_reviews' - SUCCESS
+2025-01-10 11:17:38,068 - INFO - LOAD All Tables To DWH-public - SUCCESS
+2025-01-10 11:17:38,190 - ERROR - LOAD All Tables To DWH-Staging - FAILED
+2025-01-10 11:17:38,205 - ERROR - LOAD All Tables To DWH - FAILED
+2025-01-10 11:17:38,213 - ERROR - [pid 1720] Worker Worker(salt=8882184260, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=1720) failed    Load()
+Traceback (most recent call last):
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1970, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedColumn: column customers.updated_at does not exist
+LINE 28:                         stg.customers.updated_at
+                                 ^
+HINT:  Perhaps you meant to reference the column "customers.created_at".
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/load.py", line 255, in run
+    session.execute(query)
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2306, in execute
+    return self._execute_internal(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2200, in _execute_internal
+    result = conn.execute(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1421, in execute
+    return meth(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/sql/elements.py", line 514, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1643, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1849, in _execute_context
+    return self._exec_single_context(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1989, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2356, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1970, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedColumn) column customers.updated_at does not exist
+LINE 28:                         stg.customers.updated_at
+                                 ^
+HINT:  Perhaps you meant to reference the column "customers.created_at".
+
+[SQL: INSERT INTO stg.customers 
+    (customer_id, customer_unique_id, customer_zip_code_prefix, customer_city, customer_state)
+
+SELECT
+    customer_id,
+    customer_unique_id,
+    customer_zip_code_prefix,
+    customer_city,
+    customer_state
+
+FROM public.customers
+
+ON CONFLICT(customer_id) 
+DO UPDATE SET
+    customer_unique_id = EXCLUDED.customer_unique_id,
+    customer_zip_code_prefix = EXCLUDED.customer_zip_code_prefix,
+    customer_city = EXCLUDED.customer_city,
+    customer_state = EXCLUDED.customer_state,
+
+    updated_at = CASE WHEN 
+                        stg.customers.customer_unique_id <> EXCLUDED.customer_unique_id 
+                        OR stg.customers.customer_zip_code_prefix <> EXCLUDED.customer_zip_code_prefix 
+                        OR stg.customers.customer_city <> EXCLUDED.customer_city 
+                        OR stg.customers.customer_state <> EXCLUDED.customer_state 
+                THEN
+                        CURRENT_TIMESTAMP
+                ELSE
+                        stg.customers.updated_at
+                END;]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/load.py", line 265, in run
+    raise Exception('Failed Load Tables To DWH-Staging')
+Exception: Failed Load Tables To DWH-Staging
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/luigi/worker.py", line 210, in run
+    new_deps = self._run_get_new_deps()
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/luigi/worker.py", line 138, in _run_get_new_deps
+    task_gen = self.task.run()
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/load.py", line 304, in run
+    raise Exception('Failed Load Tables To DWH')
+Exception: Failed Load Tables To DWH
+2025-01-10 11:17:38,506 - DEBUG - 1 running tasks, waiting for next task to finish
+2025-01-10 11:17:38,512 - INFO - Informed scheduler that task   Load__99914b932b   has status   FAILED
+2025-01-10 11:17:38,513 - DEBUG - Asking scheduler for work...
+2025-01-10 11:17:38,515 - DEBUG - Done
+2025-01-10 11:17:38,516 - DEBUG - There are no more tasks to run at this time
+2025-01-10 11:17:38,516 - DEBUG - There are 2 pending tasks possibly being run by other workers
+2025-01-10 11:17:38,517 - DEBUG - There are 2 pending tasks unique to this worker
+2025-01-10 11:17:38,517 - DEBUG - There are 2 pending tasks last scheduled by this worker
+2025-01-10 11:17:38,518 - INFO - Worker Worker(salt=8882184260, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=1720) was stopped. Shutting down Keep-Alive thread
+2025-01-10 11:17:38,519 - INFO - 
+===== Luigi Execution Summary =====
+
+Scheduled 3 tasks of which:
+* 1 ran successfully:
+    - 1 Extract()
+* 1 failed:
+    - 1 Load()
+* 1 were left pending, among these:
+    * 1 had failed dependencies:
+        - 1 Transform()
+
+This progress looks :( because there were failed tasks
+
+===== Luigi Execution Summary =====
+
+2025-01-10 12:38:36,917 - INFO - ==================================STARTING EXTRACT DATA=======================================
+2025-01-10 12:38:37,153 - INFO - EXTRACT 'public.geolocation' - SUCCESS.
+2025-01-10 12:38:38,061 - INFO - EXTRACT 'public.customers' - SUCCESS.
+2025-01-10 12:38:38,103 - INFO - EXTRACT 'public.sellers' - SUCCESS.
+2025-01-10 12:38:39,666 - INFO - EXTRACT 'public.order_items' - SUCCESS.
+2025-01-10 12:38:40,268 - INFO - EXTRACT 'public.order_payments' - SUCCESS.
+2025-01-10 12:38:41,657 - INFO - EXTRACT 'public.order_reviews' - SUCCESS.
+2025-01-10 12:38:43,267 - INFO - EXTRACT 'public.orders' - SUCCESS.
+2025-01-10 12:38:43,299 - INFO - EXTRACT 'public.product_category_name_translation' - SUCCESS.
+2025-01-10 12:38:43,666 - INFO - EXTRACT 'public.products' - SUCCESS.
+2025-01-10 12:38:43,667 - INFO - Extract All Tables From Sources - SUCCESS
+2025-01-10 12:38:43,697 - INFO - ==================================ENDING EXTRACT DATA=======================================
+2025-01-10 12:38:43,698 - INFO - [pid 1954] Worker Worker(salt=1031136554, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=1954) done      Extract()
+2025-01-10 12:38:43,700 - DEBUG - 1 running tasks, waiting for next task to finish
+2025-01-10 12:38:43,704 - INFO - Informed scheduler that task   Extract__99914b932b   has status   DONE
+2025-01-10 12:38:43,705 - DEBUG - Asking scheduler for work...
+2025-01-10 12:38:43,708 - DEBUG - Pending tasks: 2
+2025-01-10 12:38:43,709 - INFO - [pid 1954] Worker Worker(salt=1031136554, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=1954) running   Load()
+2025-01-10 12:38:43,744 - ERROR - truncate query TRUNCATE TABLE public.customers CASCADE;
+TRUNCATE TABLE public.geolocation CASCADE;
+TRUNCATE TABLE public.order_items CASCADE;
+TRUNCATE TABLE public.order_payments CASCADE;
+TRUNCATE TABLE public.order_reviews CASCADE;
+TRUNCATE TABLE public.orders CASCADE;
+TRUNCATE TABLE public.product_category_name_translation CASCADE;
+TRUNCATE TABLE public.products CASCADE;
+TRUNCATE TABLE public.sellers CASCADE;
+2025-01-10 12:38:45,867 - INFO - Read Extracted Data - SUCCESS
+2025-01-10 12:38:45,868 - INFO - Connect to DWH - SUCCESS
+2025-01-10 12:38:45,959 - INFO - Truncate sources Schema in DWH - SUCCESS
+2025-01-10 12:38:45,960 - INFO - ==================================STARTING LOAD DATA=======================================
+2025-01-10 12:38:46,354 - INFO - LOAD 'public.geolocation' - SUCCESS
+2025-01-10 12:38:46,364 - INFO - LOAD 'public.product_category_name_translation' - SUCCESS
+2025-01-10 12:38:48,171 - INFO - LOAD 'public.customers' - SUCCESS
+2025-01-10 12:38:48,218 - INFO - LOAD 'public.sellers' - SUCCESS
+2025-01-10 12:38:49,400 - INFO - LOAD 'public.products' - SUCCESS
+2025-01-10 12:38:51,922 - INFO - LOAD 'public.orders' - SUCCESS
+2025-01-10 12:38:54,669 - INFO - LOAD 'public.order_items' - SUCCESS
+2025-01-10 12:38:56,555 - INFO - LOAD 'public.order_payments' - SUCCESS
+2025-01-10 12:38:58,715 - INFO - LOAD 'public.order_reviews' - SUCCESS
+2025-01-10 12:38:58,716 - INFO - LOAD All Tables To DWH-public - SUCCESS
+2025-01-10 12:38:59,710 - ERROR - LOAD All Tables To DWH-Staging - FAILED
+2025-01-10 12:38:59,723 - ERROR - LOAD All Tables To DWH - FAILED
+2025-01-10 12:38:59,729 - ERROR - [pid 1954] Worker Worker(salt=1031136554, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=1954) failed    Load()
+Traceback (most recent call last):
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1970, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedColumn: column customers.updated_at does not exist
+LINE 28:                         stg.customers.updated_at
+                                 ^
+HINT:  Perhaps you meant to reference the column "customers.created_at".
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/load.py", line 255, in run
+    session.execute(query)
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2306, in execute
+    return self._execute_internal(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2200, in _execute_internal
+    result = conn.execute(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1421, in execute
+    return meth(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/sql/elements.py", line 514, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1643, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1849, in _execute_context
+    return self._exec_single_context(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1989, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2356, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1970, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedColumn) column customers.updated_at does not exist
+LINE 28:                         stg.customers.updated_at
+                                 ^
+HINT:  Perhaps you meant to reference the column "customers.created_at".
+
+[SQL: INSERT INTO stg.customers 
+    (customer_id, customer_unique_id, customer_zip_code_prefix, customer_city, customer_state)
+
+SELECT
+    customer_id,
+    customer_unique_id,
+    customer_zip_code_prefix,
+    customer_city,
+    customer_state
+
+FROM public.customers
+
+ON CONFLICT(customer_id) 
+DO UPDATE SET
+    customer_unique_id = EXCLUDED.customer_unique_id,
+    customer_zip_code_prefix = EXCLUDED.customer_zip_code_prefix,
+    customer_city = EXCLUDED.customer_city,
+    customer_state = EXCLUDED.customer_state,
+
+    updated_at = CASE WHEN 
+                        stg.customers.customer_unique_id <> EXCLUDED.customer_unique_id 
+                        OR stg.customers.customer_zip_code_prefix <> EXCLUDED.customer_zip_code_prefix 
+                        OR stg.customers.customer_city <> EXCLUDED.customer_city 
+                        OR stg.customers.customer_state <> EXCLUDED.customer_state 
+                THEN
+                        CURRENT_TIMESTAMP
+                ELSE
+                        stg.customers.updated_at
+                END;]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/load.py", line 265, in run
+    raise Exception('Failed Load Tables To DWH-Staging')
+Exception: Failed Load Tables To DWH-Staging
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/luigi/worker.py", line 210, in run
+    new_deps = self._run_get_new_deps()
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/luigi/worker.py", line 138, in _run_get_new_deps
+    task_gen = self.task.run()
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/load.py", line 304, in run
+    raise Exception('Failed Load Tables To DWH')
+Exception: Failed Load Tables To DWH
+2025-01-10 12:38:59,853 - DEBUG - 1 running tasks, waiting for next task to finish
+2025-01-10 12:38:59,858 - INFO - Informed scheduler that task   Load__99914b932b   has status   FAILED
+2025-01-10 12:38:59,858 - DEBUG - Asking scheduler for work...
+2025-01-10 12:38:59,861 - DEBUG - Done
+2025-01-10 12:38:59,861 - DEBUG - There are no more tasks to run at this time
+2025-01-10 12:38:59,861 - DEBUG - There are 2 pending tasks possibly being run by other workers
+2025-01-10 12:38:59,861 - DEBUG - There are 2 pending tasks unique to this worker
+2025-01-10 12:38:59,862 - DEBUG - There are 2 pending tasks last scheduled by this worker
+2025-01-10 12:38:59,862 - INFO - Worker Worker(salt=1031136554, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=1954) was stopped. Shutting down Keep-Alive thread
+2025-01-10 12:38:59,864 - INFO - 
+===== Luigi Execution Summary =====
+
+Scheduled 3 tasks of which:
+* 1 ran successfully:
+    - 1 Extract()
+* 1 failed:
+    - 1 Load()
+* 1 were left pending, among these:
+    * 1 had failed dependencies:
+        - 1 Transform()
+
+This progress looks :( because there were failed tasks
+
+===== Luigi Execution Summary =====
+
+2025-01-10 12:47:36,483 - INFO - ==================================STARTING EXTRACT DATA=======================================
+2025-01-10 12:47:36,831 - INFO - EXTRACT 'public.geolocation' - SUCCESS.
+2025-01-10 12:47:37,731 - INFO - EXTRACT 'public.customers' - SUCCESS.
+2025-01-10 12:47:37,771 - INFO - EXTRACT 'public.sellers' - SUCCESS.
+2025-01-10 12:47:39,190 - INFO - EXTRACT 'public.order_items' - SUCCESS.
+2025-01-10 12:47:39,883 - INFO - EXTRACT 'public.order_payments' - SUCCESS.
+2025-01-10 12:47:40,860 - INFO - EXTRACT 'public.order_reviews' - SUCCESS.
+2025-01-10 12:47:42,276 - INFO - EXTRACT 'public.orders' - SUCCESS.
+2025-01-10 12:47:42,311 - INFO - EXTRACT 'public.product_category_name_translation' - SUCCESS.
+2025-01-10 12:47:42,678 - INFO - EXTRACT 'public.products' - SUCCESS.
+2025-01-10 12:47:42,679 - INFO - Extract All Tables From Sources - SUCCESS
+2025-01-10 12:47:42,698 - INFO - ==================================ENDING EXTRACT DATA=======================================
+2025-01-10 12:47:42,700 - INFO - [pid 1991] Worker Worker(salt=7351372528, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=1991) done      Extract()
+2025-01-10 12:47:42,701 - DEBUG - 1 running tasks, waiting for next task to finish
+2025-01-10 12:47:42,704 - INFO - Informed scheduler that task   Extract__99914b932b   has status   DONE
+2025-01-10 12:47:42,705 - DEBUG - Asking scheduler for work...
+2025-01-10 12:47:42,708 - DEBUG - Pending tasks: 2
+2025-01-10 12:47:42,709 - INFO - [pid 1991] Worker Worker(salt=7351372528, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=1991) running   Load()
+2025-01-10 12:47:42,747 - ERROR - truncate query TRUNCATE TABLE public.customers CASCADE;
+TRUNCATE TABLE public.geolocation CASCADE;
+TRUNCATE TABLE public.order_items CASCADE;
+TRUNCATE TABLE public.order_payments CASCADE;
+TRUNCATE TABLE public.order_reviews CASCADE;
+TRUNCATE TABLE public.orders CASCADE;
+TRUNCATE TABLE public.product_category_name_translation CASCADE;
+TRUNCATE TABLE public.products CASCADE;
+TRUNCATE TABLE public.sellers CASCADE;
+2025-01-10 12:47:44,706 - INFO - Read Extracted Data - SUCCESS
+2025-01-10 12:47:44,707 - INFO - Connect to DWH - SUCCESS
+2025-01-10 12:47:44,794 - INFO - Truncate sources Schema in DWH - SUCCESS
+2025-01-10 12:47:44,795 - INFO - ==================================STARTING LOAD DATA=======================================
+2025-01-10 12:47:45,180 - INFO - LOAD 'public.geolocation' - SUCCESS
+2025-01-10 12:47:45,190 - INFO - LOAD 'public.product_category_name_translation' - SUCCESS
+2025-01-10 12:47:47,035 - INFO - LOAD 'public.customers' - SUCCESS
+2025-01-10 12:47:47,083 - INFO - LOAD 'public.sellers' - SUCCESS
+2025-01-10 12:47:48,231 - INFO - LOAD 'public.products' - SUCCESS
+2025-01-10 12:47:50,819 - INFO - LOAD 'public.orders' - SUCCESS
+2025-01-10 12:47:53,575 - INFO - LOAD 'public.order_items' - SUCCESS
+2025-01-10 12:47:55,474 - INFO - LOAD 'public.order_payments' - SUCCESS
+2025-01-10 12:47:57,624 - INFO - LOAD 'public.order_reviews' - SUCCESS
+2025-01-10 12:47:57,624 - INFO - LOAD All Tables To DWH-public - SUCCESS
+2025-01-10 12:48:06,013 - INFO - LOAD All Tables To DWH-Staging - SUCCESS
+2025-01-10 12:48:06,024 - INFO - ==================================ENDING LOAD DATA=======================================
+2025-01-10 12:48:06,049 - INFO - [pid 1991] Worker Worker(salt=7351372528, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=1991) done      Load()
+2025-01-10 12:48:06,050 - DEBUG - 1 running tasks, waiting for next task to finish
+2025-01-10 12:48:06,054 - INFO - Informed scheduler that task   Load__99914b932b   has status   DONE
+2025-01-10 12:48:06,054 - DEBUG - Asking scheduler for work...
+2025-01-10 12:48:06,057 - DEBUG - Pending tasks: 1
+2025-01-10 12:48:06,057 - INFO - [pid 1991] Worker Worker(salt=7351372528, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=1991) running   Transform()
+2025-01-10 12:48:06,231 - INFO - Read Transform Query - SUCCESS
+2025-01-10 12:48:06,232 - INFO - Connect to DWH - SUCCESS
+2025-01-10 12:48:06,233 - INFO - ==================================STARTING TRANSFROM DATA=======================================
+2025-01-10 12:48:06,278 - ERROR - Transform to All Dimensions and Fact Tables - FAILED
+2025-01-10 12:48:06,292 - ERROR - Transform Tables - FAILED
+2025-01-10 12:48:06,297 - ERROR - [pid 1991] Worker Worker(salt=7351372528, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=1991) failed    Transform()
+Traceback (most recent call last):
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1970, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedColumn: column "latitude" does not exist
+LINE 7:         latitude,
+                ^
+DETAIL:  There is a column named "latitude" in table "final", but it cannot be referenced from this part of the query.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/transform.py", line 113, in run
+    session.execute(query)
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2306, in execute
+    return self._execute_internal(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2200, in _execute_internal
+    result = conn.execute(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1421, in execute
+    return meth(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/sql/elements.py", line 514, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1643, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1849, in _execute_context
+    return self._exec_single_context(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1989, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2356, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1970, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedColumn) column "latitude" does not exist
+LINE 7:         latitude,
+                ^
+DETAIL:  There is a column named "latitude" in table "final", but it cannot be referenced from this part of the query.
+
+[SQL: MERGE INTO final.dim_customers AS final
+USING (
+    SELECT 
+        customer_id AS customer_nk,
+        customer_unique_id,
+        customer_zip_code_prefix,
+        latitude,
+        longitude,
+        customer_city,
+        customer_state,
+        CURRENT_TIMESTAMP AS created_at
+    FROM stg.customers
+) AS staging
+
+ON final.customer_nk = staging.customer_nk
+
+WHEN MATCHED AND (
+    final.customer_zip_code_prefix <> staging.customer_zip_code_prefix OR
+    final.customer_city <> staging.customer_city OR
+    final.customer_state <> staging.customer_state
+) THEN
+    UPDATE SET 
+        current_flag = 'Expired',
+        updated_at = CURRENT_TIMESTAMP
+
+WHEN NOT MATCHED THEN
+    INSERT (
+        customer_id, 
+        customer_nk, 
+        customer_unique_id, 
+        customer_zip_code_prefix, 
+        latitude, 
+        longitude,        
+        customer_city, 
+        customer_state, 
+        created_at, 
+        updated_at, 
+        current_flag
+    )
+    VALUES (
+        gen_random_uuid(),
+        staging.customer_nk, 
+        staging.customer_unique_id, 
+        staging.customer_zip_code_prefix, 
+        staging.latitude, 
+        staging.longitude,
+        staging.customer_city, 
+        staging.customer_state, 
+        CURRENT_TIMESTAMP, 
+        CURRENT_TIMESTAMP, 
+        'Current'
+    );
+]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/luigi/worker.py", line 210, in run
+    new_deps = self._run_get_new_deps()
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/luigi/worker.py", line 138, in _run_get_new_deps
+    task_gen = self.task.run()
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/transform.py", line 208, in run
+    raise Exception('Failed Transforming Tables')
+Exception: Failed Transforming Tables
+2025-01-10 12:48:06,536 - DEBUG - 1 running tasks, waiting for next task to finish
+2025-01-10 12:48:06,544 - INFO - Informed scheduler that task   Transform__99914b932b   has status   FAILED
+2025-01-10 12:48:06,544 - DEBUG - Asking scheduler for work...
+2025-01-10 12:48:06,551 - DEBUG - Done
+2025-01-10 12:48:06,551 - DEBUG - There are no more tasks to run at this time
+2025-01-10 12:48:06,552 - DEBUG - There are 1 pending tasks possibly being run by other workers
+2025-01-10 12:48:06,552 - DEBUG - There are 1 pending tasks unique to this worker
+2025-01-10 12:48:06,553 - DEBUG - There are 1 pending tasks last scheduled by this worker
+2025-01-10 12:48:06,553 - INFO - Worker Worker(salt=7351372528, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=1991) was stopped. Shutting down Keep-Alive thread
+2025-01-10 12:48:06,554 - INFO - 
+===== Luigi Execution Summary =====
+
+Scheduled 3 tasks of which:
+* 2 ran successfully:
+    - 1 Extract()
+    - 1 Load()
+* 1 failed:
+    - 1 Transform()
+
+This progress looks :( because there were failed tasks
+
+===== Luigi Execution Summary =====
+

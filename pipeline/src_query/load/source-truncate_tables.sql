@@ -1,5 +1,5 @@
 TRUNCATE TABLE public.customers CASCADE;
-TRUNCATE TABLE public.geolocation CASCADE ;
+TRUNCATE TABLE public.geolocation CASCADE;
 TRUNCATE TABLE public.order_items CASCADE;
 TRUNCATE TABLE public.order_payments CASCADE;
 TRUNCATE TABLE public.order_reviews CASCADE;
