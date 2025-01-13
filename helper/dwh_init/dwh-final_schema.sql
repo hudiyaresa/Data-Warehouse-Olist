@@ -102,15 +102,30 @@ CREATE TABLE final.dim_order_payments (
 DROP TABLE IF EXISTS final.dim_date;
 CREATE TABLE final.dim_date (
     date_id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
-    date DATE NOT NULL UNIQUE,
-    full_date DATE NOT NULL UNIQUE,
-    day INT NOT NULL,
-    month INT NOT NULL,
-    year INT NOT NULL,
-    quarter INT NOT NULL,
-    day_of_week INT NOT NULL,
-    day_name VARCHAR(20),
-    month_name VARCHAR(20)
+    date_actual              DATE NOT NULL,
+    day_suffix               VARCHAR(4) NOT NULL,
+    day_name                 VARCHAR(9) NOT NULL,
+    day_of_year              INT NOT NULL,
+    week_of_month            INT NOT NULL,
+    week_of_year             INT NOT NULL,
+    week_of_year_iso         CHAR(10) NOT NULL,
+    month_actual             INT NOT NULL,
+    month_name               VARCHAR(9) NOT NULL,
+    month_name_abbreviated   CHAR(3) NOT NULL,
+    quarter_actual           INT NOT NULL,
+    quarter_name             VARCHAR(9) NOT NULL,
+    year_actual              INT NOT NULL,
+    first_day_of_week        DATE NOT NULL,
+    last_day_of_week         DATE NOT NULL,
+    first_day_of_month       DATE NOT NULL,
+    last_day_of_month        DATE NOT NULL,
+    first_day_of_quarter     DATE NOT NULL,
+    last_day_of_quarter      DATE NOT NULL,
+    first_day_of_year        DATE NOT NULL,
+    last_day_of_year         DATE NOT NULL,
+    mmyyyy                   CHAR(6) NOT NULL,
+    mmddyyyy                 CHAR(10) NOT NULL,
+    weekend_indr             VARCHAR(20) NOT NULL
 );
 
 -- Fct Table Customer Order
@@ -179,6 +194,8 @@ CREATE TABLE final.fct_customer_review_delivered_products (
     CONSTRAINT fk_seller_review FOREIGN KEY (seller_id) REFERENCES final.dim_sellers(seller_id),
     CONSTRAINT fk_date_review FOREIGN KEY (date_id) REFERENCES final.dim_date(date_id)
 );
+
+
 
 -- Menambahkan Foreign Key Constraints setelah semua tabel dibuat
 ALTER TABLE final.dim_orders ADD CONSTRAINT fk_customer_nk FOREIGN KEY (customer_nk) REFERENCES final.dim_customers(customer_nk);

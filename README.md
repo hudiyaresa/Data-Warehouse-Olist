@@ -119,9 +119,10 @@ python3 elt_main.py
 ```
 
 ### Code Highlights
-- **Scripts:** Clean and modularized for easy maintenance.
+- **Scripts:** Clean and modularized using python code for easy maintenance.
 - **Error Handling:** Alerts for pipeline errors.
 - **Logging:** Comprehensive logs for each pipeline step.
+- **Alerting:** Integrate with sentry sdk for real-time alert to your email.
 
 ## Requirements
 Install dependencies with:

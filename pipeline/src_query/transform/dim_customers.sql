@@ -4,8 +4,8 @@ USING (
         customer_id AS customer_nk,
         customer_unique_id,
         customer_zip_code_prefix,
-        latitude,
-        longitude,
+        -- latitude,
+        -- longitude,
         customer_city,
         customer_state,
         CURRENT_TIMESTAMP AS created_at
@@ -15,7 +15,7 @@ USING (
 ON final.customer_nk = staging.customer_nk
 
 WHEN MATCHED AND (
-    final.customer_zip_code_prefix <> staging.customer_zip_code_prefix OR
+    -- final.customer_zip_code_prefix <> staging.customer_zip_code_prefix OR
     final.customer_city <> staging.customer_city OR
     final.customer_state <> staging.customer_state
 ) THEN
@@ -29,8 +29,8 @@ WHEN NOT MATCHED THEN
         customer_nk, 
         customer_unique_id, 
         customer_zip_code_prefix, 
-        latitude, 
-        longitude,        
+        -- latitude, 
+        -- longitude,        
         customer_city, 
         customer_state, 
         created_at, 
@@ -42,8 +42,8 @@ WHEN NOT MATCHED THEN
         staging.customer_nk, 
         staging.customer_unique_id, 
         staging.customer_zip_code_prefix, 
-        staging.latitude, 
-        staging.longitude,
+        -- staging.latitude, 
+        -- staging.longitude,
         staging.customer_city, 
         staging.customer_state, 
         CURRENT_TIMESTAMP, 
