@@ -43,7 +43,7 @@ class Transform(luigi.Task):
             )
             
             dim_order_items_query = read_sql_file(
-                file_path = f'{DIR_TRANSFORM_QUERY}/dim_order_items_sql'
+                file_path = f'{DIR_TRANSFORM_QUERY}/dim_order_items.sql'
             )
             
             dim_order_payments_query = read_sql_file(
@@ -70,8 +70,8 @@ class Transform(luigi.Task):
                 file_path = f'{DIR_TRANSFORM_QUERY}/fct_customer_orders.sql'
             )
             
-            fct_customer_review_delivery_orders_query = read_sql_file(
-                file_path = f'{DIR_TRANSFORM_QUERY}/fct_customer_review_delivery_orders.sql'
+            fct_customer_review_delivered_products_query = read_sql_file(
+                file_path = f'{DIR_TRANSFORM_QUERY}/fct_customer_review_delivered_products.sql'
             )
             
             fct_seller_processes_orders_query = read_sql_file(
@@ -151,10 +151,10 @@ class Transform(luigi.Task):
             session.execute(query)
             logging.info("Transform to 'final.fct_customer_orders_query' - SUCCESS")
             
-            # Transform to final.fct_customer_review_delivery_orders
-            query = sqlalchemy.text(fct_customer_review_delivery_orders_query)
+            # Transform to final.fct_customer_review_delivered_products
+            query = sqlalchemy.text(fct_customer_review_delivered_products_query)
             session.execute(query)
-            logging.info("Transform to 'final.fct_customer_review_delivery_orders' - SUCCESS")
+            logging.info("Transform to 'final.fct_customer_review_delivered_products' - SUCCESS")
             
             # Transform to final.fct_seller_processes_orders
             query = sqlalchemy.text(fct_seller_processes_orders_query)
