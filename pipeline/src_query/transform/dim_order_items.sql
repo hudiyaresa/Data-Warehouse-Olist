@@ -9,7 +9,7 @@ WHEN MATCHED THEN
         order_nk = stg.order_id,
         product_id = stg.product_id,
         seller_nk = stg.seller_id,
-        shipping_limit_date = stg.shipping_limit_date,
+        shipping_limit_date = stg.shipping_limit_date::timestamp,
         updated_at = CURRENT_TIMESTAMP
 
 WHEN NOT MATCHED THEN
@@ -33,7 +33,7 @@ WHEN NOT MATCHED THEN
         stg.order_id, 
         stg.product_id, 
         stg.seller_id, 
-        stg.shipping_limit_date, 
+        stg.shipping_limit_date::timestamp, 
         CURRENT_TIMESTAMP, 
         CURRENT_TIMESTAMP
     );
