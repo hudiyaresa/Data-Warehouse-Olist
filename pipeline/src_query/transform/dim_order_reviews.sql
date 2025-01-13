@@ -8,19 +8,19 @@ USING (
         review_comment_message,
         review_creation_date,
         CURRENT_TIMESTAMP AS created_at
-    FROM staging.order_reviews
-) AS staging
+    FROM stg.order_reviews
+) AS stg
 
-ON final.review_nk = staging.review_nk
-    AND final.order_id = staging.order_id
+ON final.review_nk = stg.review_nk
+    AND final.order_id = stg.order_id
 
 WHEN MATCHED THEN
     UPDATE SET
-        review_score = staging.review_score,
-        order_id = staging.order_id,
-        review_comment_title = staging.review_comment_title,
-        review_comment_message = staging.review_comment_message,
-        review_creation_date = staging.review_creation_date,
+        review_score = stg.review_score,
+        order_id = stg.order_id,
+        review_comment_title = stg.review_comment_title,
+        review_comment_message = stg.review_comment_message,
+        review_creation_date = stg.review_creation_date,
         updated_at = CURRENT_TIMESTAMP
 
 WHEN NOT MATCHED THEN
@@ -37,12 +37,12 @@ WHEN NOT MATCHED THEN
     )
     VALUES (
         gen_random_uuid(), 
-        staging.review_nk, 
-        staging.review_score, 
-        staging.order_id, 
-        staging.review_comment_title, 
-        staging.review_comment_message, 
-        staging.review_creation_date, 
+        stg.review_nk, 
+        stg.review_score, 
+        stg.order_id, 
+        stg.review_comment_title, 
+        stg.review_comment_message, 
+        stg.review_creation_date, 
         CURRENT_TIMESTAMP, 
         CURRENT_TIMESTAMP
     );

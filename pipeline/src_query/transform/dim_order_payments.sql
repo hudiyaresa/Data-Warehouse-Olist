@@ -7,16 +7,16 @@ USING (
         order_id,
         payment_type,
         CURRENT_TIMESTAMP AS created_at
-    FROM staging.order_payments
-) AS staging
+    FROM stg.order_payments
+) AS stg
 
-ON final.payment_sequential_id = staging.payment_sequential_id
-    AND final.order_nk = staging.order_id
+ON final.payment_sequential_id = stg.payment_sequential_id
+    AND final.order_nk = stg.order_id
 
 WHEN MATCHED AND (
-    final.payment_installments <> staging.payment_installments OR
-    final.payment_value <> staging.payment_value OR
-    final.payment_type <> staging.payment_type
+    final.payment_installments <> stg.payment_installments OR
+    final.payment_value <> stg.payment_value OR
+    final.payment_type <> stg.payment_type
 ) THEN
     UPDATE SET 
         current_flag = 'Expired',
@@ -36,11 +36,11 @@ WHEN NOT MATCHED THEN
     )
     VALUES (
         gen_random_uuid(), 
-        staging.payment_sequential, 
-        staging.payment_installments, 
-        staging.payment_value, 
-        staging.order_id, 
-        staging.payment_type, 
+        stg.payment_sequential, 
+        stg.payment_installments, 
+        stg.payment_value, 
+        stg.order_id, 
+        stg.payment_type, 
         CURRENT_TIMESTAMP, 
         CURRENT_TIMESTAMP, 
         'Current'

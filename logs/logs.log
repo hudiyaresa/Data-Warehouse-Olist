@@ -4427,3 +4427,345 @@ This progress looks :( because there were failed tasks
 
 ===== Luigi Execution Summary =====
 
+2025-01-13 12:52:58,941 - INFO - ==================================STARTING EXTRACT DATA=======================================
+2025-01-13 12:52:59,287 - INFO - EXTRACT 'public.geolocation' - SUCCESS.
+2025-01-13 12:52:59,978 - INFO - EXTRACT 'public.customers' - SUCCESS.
+2025-01-13 12:53:00,022 - INFO - EXTRACT 'public.sellers' - SUCCESS.
+2025-01-13 12:53:01,106 - INFO - EXTRACT 'public.order_items' - SUCCESS.
+2025-01-13 12:53:01,730 - INFO - EXTRACT 'public.order_payments' - SUCCESS.
+2025-01-13 12:53:03,112 - INFO - EXTRACT 'public.order_reviews' - SUCCESS.
+2025-01-13 12:53:04,424 - INFO - EXTRACT 'public.orders' - SUCCESS.
+2025-01-13 12:53:04,457 - INFO - EXTRACT 'public.product_category_name_translation' - SUCCESS.
+2025-01-13 12:53:04,748 - INFO - EXTRACT 'public.products' - SUCCESS.
+2025-01-13 12:53:04,750 - INFO - Extract All Tables From Sources - SUCCESS
+2025-01-13 12:53:04,776 - INFO - ==================================ENDING EXTRACT DATA=======================================
+2025-01-13 12:53:04,778 - INFO - [pid 7358] Worker Worker(salt=3475443212, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=7358) done      Extract()
+2025-01-13 12:53:04,779 - DEBUG - 1 running tasks, waiting for next task to finish
+2025-01-13 12:53:04,782 - INFO - Informed scheduler that task   Extract__99914b932b   has status   DONE
+2025-01-13 12:53:04,782 - DEBUG - Asking scheduler for work...
+2025-01-13 12:53:04,786 - DEBUG - Pending tasks: 2
+2025-01-13 12:53:04,787 - INFO - [pid 7358] Worker Worker(salt=3475443212, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=7358) running   Load()
+2025-01-13 12:53:04,804 - ERROR - truncate query TRUNCATE TABLE public.customers CASCADE;
+TRUNCATE TABLE public.geolocation CASCADE;
+TRUNCATE TABLE public.order_items CASCADE;
+TRUNCATE TABLE public.order_payments CASCADE;
+TRUNCATE TABLE public.order_reviews CASCADE;
+TRUNCATE TABLE public.orders CASCADE;
+TRUNCATE TABLE public.product_category_name_translation CASCADE;
+TRUNCATE TABLE public.products CASCADE;
+TRUNCATE TABLE public.sellers CASCADE;
+2025-01-13 12:53:06,344 - INFO - Read Extracted Data - SUCCESS
+2025-01-13 12:53:06,346 - INFO - Connect to DWH - SUCCESS
+2025-01-13 12:53:06,444 - INFO - Truncate sources Schema in DWH - SUCCESS
+2025-01-13 12:53:06,444 - INFO - ==================================STARTING LOAD DATA=======================================
+2025-01-13 12:53:06,781 - INFO - LOAD 'public.geolocation' - SUCCESS
+2025-01-13 12:53:06,791 - INFO - LOAD 'public.product_category_name_translation' - SUCCESS
+2025-01-13 12:53:08,521 - INFO - LOAD 'public.customers' - SUCCESS
+2025-01-13 12:53:08,572 - INFO - LOAD 'public.sellers' - SUCCESS
+2025-01-13 12:53:09,533 - INFO - LOAD 'public.products' - SUCCESS
+2025-01-13 12:53:11,776 - INFO - LOAD 'public.orders' - SUCCESS
+2025-01-13 12:53:14,120 - INFO - LOAD 'public.order_items' - SUCCESS
+2025-01-13 12:53:15,835 - INFO - LOAD 'public.order_payments' - SUCCESS
+2025-01-13 12:53:18,009 - INFO - LOAD 'public.order_reviews' - SUCCESS
+2025-01-13 12:53:18,010 - INFO - LOAD All Tables To DWH-public - SUCCESS
+2025-01-13 12:53:26,071 - INFO - LOAD All Tables To DWH-Staging - SUCCESS
+2025-01-13 12:53:26,082 - INFO - ==================================ENDING LOAD DATA=======================================
+2025-01-13 12:53:26,110 - INFO - [pid 7358] Worker Worker(salt=3475443212, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=7358) done      Load()
+2025-01-13 12:53:26,111 - DEBUG - 1 running tasks, waiting for next task to finish
+2025-01-13 12:53:26,114 - INFO - Informed scheduler that task   Load__99914b932b   has status   DONE
+2025-01-13 12:53:26,115 - DEBUG - Asking scheduler for work...
+2025-01-13 12:53:26,117 - DEBUG - Pending tasks: 1
+2025-01-13 12:53:26,118 - INFO - [pid 7358] Worker Worker(salt=3475443212, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=7358) running   Transform()
+2025-01-13 12:53:26,175 - INFO - Read Transform Query - SUCCESS
+2025-01-13 12:53:26,177 - INFO - Connect to DWH - SUCCESS
+2025-01-13 12:53:26,177 - INFO - ==================================STARTING TRANSFROM DATA=======================================
+2025-01-13 12:53:26,864 - INFO - Transform to 'final.dim_customers' - SUCCESS
+2025-01-13 12:53:26,870 - ERROR - Transform to All Dimensions and Fact Tables - FAILED
+2025-01-13 12:53:26,889 - ERROR - Transform Tables - FAILED
+2025-01-13 12:53:26,894 - ERROR - [pid 7358] Worker Worker(salt=3475443212, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=7358) failed    Transform()
+Traceback (most recent call last):
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1970, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedTable: relation "staging.order_items" does not exist
+LINE 2: USING staging.order_items AS staging
+              ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/transform.py", line 118, in run
+    session.execute(query)
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2306, in execute
+    return self._execute_internal(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2200, in _execute_internal
+    result = conn.execute(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1421, in execute
+    return meth(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/sql/elements.py", line 514, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1643, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1849, in _execute_context
+    return self._exec_single_context(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1989, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2356, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1970, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedTable) relation "staging.order_items" does not exist
+LINE 2: USING staging.order_items AS staging
+              ^
+
+[SQL: MERGE INTO final.dim_order_items AS final
+USING staging.order_items AS staging
+ON final.order_item_id = staging.order_item_id
+
+WHEN MATCHED THEN
+    UPDATE SET
+        price = staging.price,
+        freight_value = staging.freight_value,
+        order_nk = staging.order_id,
+        product_id = staging.product_id,
+        seller_nk = staging.seller_id,
+        shipping_limit_date = staging.shipping_limit_date,
+        updated_at = CURRENT_TIMESTAMP
+
+WHEN NOT MATCHED THEN
+    INSERT (
+        order_item_id, 
+        order_item_nk, 
+        price, 
+        freight_value, 
+        order_nk, 
+        product_id, 
+        seller_nk, 
+        shipping_limit_date, 
+        created_at, 
+        updated_at
+    )
+    VALUES (
+        gen_random_uuid(), 
+        staging.order_item_id, 
+        staging.price, 
+        staging.freight_value, 
+        staging.order_id, 
+        staging.product_id, 
+        staging.seller_id, 
+        staging.shipping_limit_date, 
+        CURRENT_TIMESTAMP, 
+        CURRENT_TIMESTAMP
+    );
+]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/luigi/worker.py", line 210, in run
+    new_deps = self._run_get_new_deps()
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/luigi/worker.py", line 138, in _run_get_new_deps
+    task_gen = self.task.run()
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/transform.py", line 208, in run
+    raise Exception('Failed Transforming Tables')
+Exception: Failed Transforming Tables
+2025-01-13 12:53:27,039 - DEBUG - 1 running tasks, waiting for next task to finish
+2025-01-13 12:53:27,046 - INFO - Informed scheduler that task   Transform__99914b932b   has status   FAILED
+2025-01-13 12:53:27,047 - DEBUG - Asking scheduler for work...
+2025-01-13 12:53:27,049 - DEBUG - Done
+2025-01-13 12:53:27,049 - DEBUG - There are no more tasks to run at this time
+2025-01-13 12:53:27,050 - DEBUG - There are 1 pending tasks possibly being run by other workers
+2025-01-13 12:53:27,050 - DEBUG - There are 1 pending tasks unique to this worker
+2025-01-13 12:53:27,051 - DEBUG - There are 1 pending tasks last scheduled by this worker
+2025-01-13 12:53:27,051 - INFO - Worker Worker(salt=3475443212, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=7358) was stopped. Shutting down Keep-Alive thread
+2025-01-13 12:53:27,052 - INFO - 
+===== Luigi Execution Summary =====
+
+Scheduled 3 tasks of which:
+* 2 ran successfully:
+    - 1 Extract()
+    - 1 Load()
+* 1 failed:
+    - 1 Transform()
+
+This progress looks :( because there were failed tasks
+
+===== Luigi Execution Summary =====
+
+2025-01-13 12:56:16,997 - INFO - ==================================STARTING EXTRACT DATA=======================================
+2025-01-13 12:56:17,234 - INFO - EXTRACT 'public.geolocation' - SUCCESS.
+2025-01-13 12:56:17,836 - INFO - EXTRACT 'public.customers' - SUCCESS.
+2025-01-13 12:56:17,866 - INFO - EXTRACT 'public.sellers' - SUCCESS.
+2025-01-13 12:56:18,831 - INFO - EXTRACT 'public.order_items' - SUCCESS.
+2025-01-13 12:56:19,339 - INFO - EXTRACT 'public.order_payments' - SUCCESS.
+2025-01-13 12:56:20,176 - INFO - EXTRACT 'public.order_reviews' - SUCCESS.
+2025-01-13 12:56:21,430 - INFO - EXTRACT 'public.orders' - SUCCESS.
+2025-01-13 12:56:21,463 - INFO - EXTRACT 'public.product_category_name_translation' - SUCCESS.
+2025-01-13 12:56:21,776 - INFO - EXTRACT 'public.products' - SUCCESS.
+2025-01-13 12:56:21,777 - INFO - Extract All Tables From Sources - SUCCESS
+2025-01-13 12:56:21,797 - INFO - ==================================ENDING EXTRACT DATA=======================================
+2025-01-13 12:56:21,798 - INFO - [pid 7389] Worker Worker(salt=8110343178, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=7389) done      Extract()
+2025-01-13 12:56:21,802 - DEBUG - 1 running tasks, waiting for next task to finish
+2025-01-13 12:56:21,806 - INFO - Informed scheduler that task   Extract__99914b932b   has status   DONE
+2025-01-13 12:56:21,806 - DEBUG - Asking scheduler for work...
+2025-01-13 12:56:21,809 - DEBUG - Pending tasks: 2
+2025-01-13 12:56:21,810 - INFO - [pid 7389] Worker Worker(salt=8110343178, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=7389) running   Load()
+2025-01-13 12:56:21,838 - ERROR - truncate query TRUNCATE TABLE public.customers CASCADE;
+TRUNCATE TABLE public.geolocation CASCADE;
+TRUNCATE TABLE public.order_items CASCADE;
+TRUNCATE TABLE public.order_payments CASCADE;
+TRUNCATE TABLE public.order_reviews CASCADE;
+TRUNCATE TABLE public.orders CASCADE;
+TRUNCATE TABLE public.product_category_name_translation CASCADE;
+TRUNCATE TABLE public.products CASCADE;
+TRUNCATE TABLE public.sellers CASCADE;
+2025-01-13 12:56:23,386 - INFO - Read Extracted Data - SUCCESS
+2025-01-13 12:56:23,387 - INFO - Connect to DWH - SUCCESS
+2025-01-13 12:56:23,465 - INFO - Truncate sources Schema in DWH - SUCCESS
+2025-01-13 12:56:23,466 - INFO - ==================================STARTING LOAD DATA=======================================
+2025-01-13 12:56:23,770 - INFO - LOAD 'public.geolocation' - SUCCESS
+2025-01-13 12:56:23,779 - INFO - LOAD 'public.product_category_name_translation' - SUCCESS
+2025-01-13 12:56:25,281 - INFO - LOAD 'public.customers' - SUCCESS
+2025-01-13 12:56:25,330 - INFO - LOAD 'public.sellers' - SUCCESS
+2025-01-13 12:56:26,229 - INFO - LOAD 'public.products' - SUCCESS
+2025-01-13 12:56:28,268 - INFO - LOAD 'public.orders' - SUCCESS
+2025-01-13 12:56:30,436 - INFO - LOAD 'public.order_items' - SUCCESS
+2025-01-13 12:56:31,989 - INFO - LOAD 'public.order_payments' - SUCCESS
+2025-01-13 12:56:33,734 - INFO - LOAD 'public.order_reviews' - SUCCESS
+2025-01-13 12:56:33,735 - INFO - LOAD All Tables To DWH-public - SUCCESS
+2025-01-13 12:56:41,525 - INFO - LOAD All Tables To DWH-Staging - SUCCESS
+2025-01-13 12:56:41,537 - INFO - ==================================ENDING LOAD DATA=======================================
+2025-01-13 12:56:41,563 - INFO - [pid 7389] Worker Worker(salt=8110343178, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=7389) done      Load()
+2025-01-13 12:56:41,564 - DEBUG - 1 running tasks, waiting for next task to finish
+2025-01-13 12:56:41,567 - INFO - Informed scheduler that task   Load__99914b932b   has status   DONE
+2025-01-13 12:56:41,567 - DEBUG - Asking scheduler for work...
+2025-01-13 12:56:41,570 - DEBUG - Pending tasks: 1
+2025-01-13 12:56:41,570 - INFO - [pid 7389] Worker Worker(salt=8110343178, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=7389) running   Transform()
+2025-01-13 12:56:41,660 - INFO - Read Transform Query - SUCCESS
+2025-01-13 12:56:41,662 - INFO - Connect to DWH - SUCCESS
+2025-01-13 12:56:41,662 - INFO - ==================================STARTING TRANSFROM DATA=======================================
+2025-01-13 12:56:42,323 - INFO - Transform to 'final.dim_customers' - SUCCESS
+2025-01-13 12:56:42,327 - ERROR - Transform to All Dimensions and Fact Tables - FAILED
+2025-01-13 12:56:42,339 - ERROR - Transform Tables - FAILED
+2025-01-13 12:56:42,344 - ERROR - [pid 7389] Worker Worker(salt=8110343178, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=7389) failed    Transform()
+Traceback (most recent call last):
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1970, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedFunction: operator does not exist: uuid = integer
+LINE 3: ON final.order_item_id = stg.order_item_id
+                               ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/transform.py", line 118, in run
+    session.execute(query)
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2306, in execute
+    return self._execute_internal(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2200, in _execute_internal
+    result = conn.execute(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1421, in execute
+    return meth(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/sql/elements.py", line 514, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1643, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1849, in _execute_context
+    return self._exec_single_context(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1989, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2356, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1970, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedFunction) operator does not exist: uuid = integer
+LINE 3: ON final.order_item_id = stg.order_item_id
+                               ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+
+[SQL: MERGE INTO final.dim_order_items AS final
+USING stg.order_items AS stg
+ON final.order_item_id = stg.order_item_id
+
+WHEN MATCHED THEN
+    UPDATE SET
+        price = stg.price,
+        freight_value = stg.freight_value,
+        order_nk = stg.order_id,
+        product_id = stg.product_id,
+        seller_nk = stg.seller_id,
+        shipping_limit_date = stg.shipping_limit_date,
+        updated_at = CURRENT_TIMESTAMP
+
+WHEN NOT MATCHED THEN
+    INSERT (
+        order_item_id, 
+        order_item_nk, 
+        price, 
+        freight_value, 
+        order_nk, 
+        product_id, 
+        seller_nk, 
+        shipping_limit_date, 
+        created_at, 
+        updated_at
+    )
+    VALUES (
+        gen_random_uuid(), 
+        stg.order_item_id, 
+        stg.price, 
+        stg.freight_value, 
+        stg.order_id, 
+        stg.product_id, 
+        stg.seller_id, 
+        stg.shipping_limit_date, 
+        CURRENT_TIMESTAMP, 
+        CURRENT_TIMESTAMP
+    );
+]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/luigi/worker.py", line 210, in run
+    new_deps = self._run_get_new_deps()
+  File "/mnt/d/coding/training/Data_Warehouse/Week_05/dataset-olist/.venvu/lib/python3.10/site-packages/luigi/worker.py", line 138, in _run_get_new_deps
+    task_gen = self.task.run()
+  File "/mnt/d/Coding/Training/Data_Warehouse/Week_05/dataset-olist/pipeline/transform.py", line 208, in run
+    raise Exception('Failed Transforming Tables')
+Exception: Failed Transforming Tables
+2025-01-13 12:56:42,471 - DEBUG - 1 running tasks, waiting for next task to finish
+2025-01-13 12:56:42,477 - INFO - Informed scheduler that task   Transform__99914b932b   has status   FAILED
+2025-01-13 12:56:42,477 - DEBUG - Asking scheduler for work...
+2025-01-13 12:56:42,479 - DEBUG - Done
+2025-01-13 12:56:42,479 - DEBUG - There are no more tasks to run at this time
+2025-01-13 12:56:42,480 - DEBUG - There are 1 pending tasks possibly being run by other workers
+2025-01-13 12:56:42,480 - DEBUG - There are 1 pending tasks unique to this worker
+2025-01-13 12:56:42,480 - DEBUG - There are 1 pending tasks last scheduled by this worker
+2025-01-13 12:56:42,481 - INFO - Worker Worker(salt=8110343178, workers=1, host=DESKTOP-MDVFE7I, username=user, pid=7389) was stopped. Shutting down Keep-Alive thread
+2025-01-13 12:56:42,481 - INFO - 
+===== Luigi Execution Summary =====
+
+Scheduled 3 tasks of which:
+* 2 ran successfully:
+    - 1 Extract()
+    - 1 Load()
+* 1 failed:
+    - 1 Transform()
+
+This progress looks :( because there were failed tasks
+
+===== Luigi Execution Summary =====
+
