@@ -19,7 +19,7 @@
 ---
 
 ## Overview
-This project implements a Data Warehouse (DWH) for Olist, leveraging Slowly Changing Dimensions (SCD) strategies and an ELT pipeline using Python, SQL, and Luigi for orchestration.
+This project implements a Data Warehouse (DWH) for Olist, leveraging Slowly Changing Dimensions (SCD) strategies and an ELT pipeline using Python, SQL, and Luigi for orchestration from my article in Medium [here](https://medium.com/@hudiya.resa/designing-the-data-warehouse-olist-marketplace-case-study-6c3b111aa0c9).
 
 ## Requirements Gathering
 Below are some of the most critical questions and answers gathered during the requirements phase for SCD strategy scope:
@@ -48,6 +48,15 @@ Below are some of the most critical questions and answers gathered during the re
 8. **Should order statuses be subject to historical tracking?**  
    Yes, tracking the full lifecycle of an order statuses like "approved," "shipped," and "delivered" is essential for analyzing the delivery process and identifying potential delays. We want to see the full journey of an order, like when it was approved, shipped, and delivered. This helps us understand the delivery process and where delays might occur.
 
+### Business Process
+
+| **Business Process**                       | **Performance Metrics**                                           |  
+|--------------------------------------------|------------------------------------------------------------------|  
+| **Product Orders**                        | Order count, total transactions, popular payment methods, location distribution of sellers and customers.  |  
+| **Seller Process Orders**                 | Seller performance and response rate, average processing time, Longest delay in order processing.     |  
+| **Customer Review of Delivered Products** | Average review score for sellers and product categories, On-time delivery rate. |  
+
+
 ## Slowly Changing Dimension (SCD)
 ### Strategy
 Based on the gathered requirements, the following SCD strategies will be applied:
@@ -61,6 +70,21 @@ Based on the gathered requirements, the following SCD strategies will be applied
 | dim_order_reviews    | Type 1   | Reviews are fixed once submitted. Use `created_at` and `updated_at`.       |
 | dim_orders           | Type 2   | Order statuses (e.g., approved, delivered) change over time. Use `created_at`, `expired_at`, and `current_flag`. |
 | dim_order_items      | Type 1   | Order items remain static once recorded. Use `created_at` and `updated_at`. |
+
+
+### Bus Matrix
+
+| **Facts / Dimensions**                  | **Customers** | **Products** | **Sellers** | **Order Payments** | **Order Reviews** | **Orders** | **Order Items** | **Date** |  
+|-----------------------------------------|---------------|--------------|-------------|--------------------|-------------------|------------|-----------------|----------|  
+| **Product Orders (Fct_Customer_Order_Products)**  | ✔️            | ✔️           | ✔️          | ✔️                 |                 | ✔️         | ✔️              | ✔️       |  
+| **Delivery Orders (Fct_Seller_Process_Orders)**   | ✔️            | ✔️           | ✔️          |                    |                 | ✔️         | ✔️              | ✔️       |  
+| **Customer Satisfaction (Fct_Customer_Review_Delivered_Products)** | ✔️    | ✔️           | ✔️          |                    | ✔️              |            |                 | ✔️       |  
+
+
+### ERD Final Plan
+
+![ELT Final Plan Olist](img_assets/ERD_Olist.png)
+
 
 ## ELT with Python & SQL
 
